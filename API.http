@@ -1,2 +1,5 @@
 
 GET http://localhost:3000/api/status?test=abcd HTTP/1.1
+
+###
+GET http://localhost:3000/api/items HTTP/1.1
