@@ -22,7 +22,9 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
-
+  serverMiddleware: [
+    '~/api/router-middleware'
+  ],
   /*
    ** Global CSS
    */
@@ -31,13 +33,16 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/axios.js',
+    '~/plugins/nuxt-client-init.client.js',
+    '~/plugins/repository.js'
+  ],
 
   /*
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/eslint-module'
@@ -47,7 +52,9 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: ''
+  },
 
   /*
    ** Build configuration
