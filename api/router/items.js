@@ -5,6 +5,7 @@ const { items } = services
 
 router.route('/')
   .get(function (req, res) {
+    items.findAll()
     return res.status(200).json([])
    })
   .post(function (req, res) { })

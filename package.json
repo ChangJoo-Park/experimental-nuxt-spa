@@ -23,6 +23,7 @@
     "express": "^4.16.4",
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.6",
     "nuxt": "^2.4.0"
   },
   "devDependencies": {
