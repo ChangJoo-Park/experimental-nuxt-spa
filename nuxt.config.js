@@ -23,6 +23,7 @@ module.exports = {
    */
   loading: { color: '#fff' },
   serverMiddleware: [
+    '~/api/logger-middleware',
     '~/api/router-middleware'
   ],
   /*
