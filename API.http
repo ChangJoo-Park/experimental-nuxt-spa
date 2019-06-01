@@ -3,3 +3,25 @@ GET http://localhost:3000/api/status?test=abcd HTTP/1.1
 
 ###
 GET http://localhost:3000/api/items HTTP/1.1
+
+### Create Item
+POST http://localhost:3000/api/items HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Hello World"
+}
+
+### Get One Item
+GET http://localhost:3000/api/items/5cf27efd6320ac40c4f22daf HTTP/1.1
+
+### Patch One Item
+PATCH http://localhost:3000/api/items/5cf27efd6320ac40c4f22daf HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Hello Worl3343"
+}
+
+### Delete One Item
+DELETE http://localhost:3000/api/items/5cf27f7c4060be08788cfd63 HTTP/1.1
