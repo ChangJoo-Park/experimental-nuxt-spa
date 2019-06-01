@@ -7,8 +7,8 @@ export default $axios => {
     return $axios.get(`/api/items/${uuid}`)
   }
 
-  const create = (uuid, payload) => {
-    return $axios.post(`/api/items/${uuid}`, payload)
+  const create = payload => {
+    return $axios.post(`/api/items/`, payload)
   }
 
   const patchOne = (uuid, option) => {
