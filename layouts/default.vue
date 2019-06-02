@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="user">
-      {{ user.username }}
+      <div>{{ user.username }}</div>
     </div>
     <div v-else>
       <button @click="$router.push({ name: 'login' })">Login</button>

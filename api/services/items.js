@@ -1,17 +1,46 @@
 import { ObjectID } from 'mongodb'
 import { mongo } from '../database'
 
-const findAll = () => {
-  return mongo(db => db.collection('items').find({}).toArray())
+const PRIORITY = {
+  HIGH: 'high',
+  MEDIUM: 'medium',
+  LOW: 'low'
+}
+
+const NEW_ITEM = {
+  _id: null,
+  userId: null,
+  title: '',
+  startDate: null,
+  endDate: null,
+  startTime: null,
+  endTime: null,
+  list: [],
+  assigned: null,
+  done: false,
+  projectId: null,
+  priority: PRIORITY.MEDIUM
+}
+
+const findAll = (user) => {
+  return mongo(db => db.collection('items').find({ userId: user._id }).toArray())
 }
 
 const findOneByUUID = (uuid) => {
   return mongo(db => db.collection('items').findOne({ _id: ObjectID(uuid) }))
 }
 
-const create = (payload) => {
-  return mongo(db => db.collection('items').insertOne(payload))
+const create = (user, { title }) => {
+  const newItem = NEW_ITEM
+  newItem._id = new ObjectID()
+  newItem.userId = ObjectID(user._id)
+  newItem.title = title
+  console.log('newItem => ', newItem)
+  return mongo(db => db.collection('items').insertOne(newItem))
     .then(({ ok, ops }) => ops[0])
+    .catch(error => {
+      console.error(error)
+    })
 }
 
 const updateOne = (payload) => {

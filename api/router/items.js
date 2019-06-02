@@ -6,12 +6,11 @@ const { items } = services
 const { auth } = middlewares
 
 router.route('/')
-  .get(function (req, res) {
-    return items.findAll().then(result => res.status(200).json(result))
+  .get([ auth.authenticated ], function (req, res) {
+    return items.findAll(res.locals.user).then(result => res.status(200).json(result))
   })
   .post([ auth.authenticated ], function (req, res) {
-    console.log(res.locals.user)
-    return items.create(req.body).then(result => res.status(201).json(result))
+    return items.create(res.locals.user, req.body).then(result => res.status(201).json(result))
   })
 
 router.route('/:itemId')
