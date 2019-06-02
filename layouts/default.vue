@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-4">
     <div v-if="user">
       <div>{{ user.username }}</div>
     </div>
@@ -20,6 +20,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

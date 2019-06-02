@@ -4,10 +4,10 @@
     <input
       id="new-form-input"
       v-model.trim="title"
-      @keyup.enter="trySubmit"
       type="text"
       class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
       required
+      @keyup.enter="trySubmit"
     />
   </div>
 </template>
@@ -27,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

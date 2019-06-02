@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1>Hello World</h1>
-    <form class="border" @submit.prevent="tryAddItem">
-      <div>
-        <input v-model="newItemTitle" type="text" />
-      </div>
-      <input type="submit" />
-    </form>
+    <new-task-input @on-submit="tryAddItem" />
     <div v-if="itemsCount">
-      {{ itemsCount }}
-      <pre>{{ items }}</pre>
+      <div>
+        <ul>
+          <li v-for="item in items" :key="item._id">
+            {{ item.title }}
+          </li>
+        </ul>
+      </div>
     </div>
     <div v-else>
       아이템이 없습니다 :(
@@ -18,7 +18,12 @@
 </template>
 
 <script>
+import NewTaskInput from '~/components/Task/NewTaskInput.vue'
+
 export default {
+  components: {
+    NewTaskInput
+  },
   data() {
     return {
       newItemTitle: ''
@@ -43,12 +48,15 @@ export default {
       .catch(error => console.errro(error))
   },
   methods: {
-    tryAddItem() {
+    tryAddItem(title) {
+      if (!title) {
+        return
+      }
+
       return this.$repo.items
-        .create(this.newItemTitle)
+        .create(title)
         .then(response => {
           this.items.push(response.data)
-          this.newItemTitle = ''
         })
         .catch(error => console.error(error))
     }
