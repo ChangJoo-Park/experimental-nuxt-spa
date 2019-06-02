@@ -7,6 +7,7 @@ GET http://localhost:3000/api/items HTTP/1.1
 ### Create Item
 POST http://localhost:3000/api/items HTTP/1.1
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2YzMmE1N2Y2NThlMzM5YmNmMjljYjQiLCJlbWFpbCI6InBjanBjajJAZ21haWwuY29tIiwiaWF0IjoxNTU5NDQyOTcyfQ.72xEu9gpQ1bqqprxhNakYOUqdt0dwgNv9B-Y3ce4F9I
 
 {
   "title": "Hello World"

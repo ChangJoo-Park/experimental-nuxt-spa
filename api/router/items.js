@@ -1,13 +1,16 @@
 import express from 'express'
 import services from '../services'
+import middlewares from '../middlewares'
 const router = express.Router()
 const { items } = services
+const { auth } = middlewares
 
 router.route('/')
   .get(function (req, res) {
     return items.findAll().then(result => res.status(200).json(result))
   })
-  .post(function (req, res) {
+  .post([ auth.authenticated ], function (req, res) {
+    console.log(res.locals.user)
     return items.create(req.body).then(result => res.status(201).json(result))
   })
 

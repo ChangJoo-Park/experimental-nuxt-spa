@@ -11,6 +11,9 @@
         <li v-for="item in items" :key="item._id">{{ item }}</li>
       </ul>
     </div>
+
+    <button @click="$router.push({ name: 'login' })">Login</button>
+    <button @click="$router.push({ name: 'signup' })">SignUp</button>
   </div>
 </template>
 
