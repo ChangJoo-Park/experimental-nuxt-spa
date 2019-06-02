@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <button @click="$router.push({ name: 'login' })">Login</button>
-    <button @click="$router.push({ name: 'signup' })">SignUp</button>
+    <h1 class="text-6xl">Hello World</h1>
   </div>
 </template>
 

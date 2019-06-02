@@ -23,8 +23,9 @@ export const actions = {
             Authorization: key
           }
         })
+        console.log('response => ', response.data)
         if (response.data) {
-          context.commit('SET_USER', response.data.user)
+          context.commit('SET_USER', response.data)
           return Promise.resolve()
         } else {
           Cookies.remove('authorization')

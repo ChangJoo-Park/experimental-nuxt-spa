@@ -4,7 +4,6 @@ import services from '../services'
 
 const authenticated = async (req, res, next) => {
   try {
-    console.log(req.header('Authorization'))
     const verified = jwt.verify(req.header('Authorization'), config.secret)
     return services.users.findOneByUUID(verified._id)
       .then(result => {
