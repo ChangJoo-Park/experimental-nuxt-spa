@@ -25,3 +25,27 @@ Content-Type: application/json
 
 ### Delete One Item
 DELETE http://localhost:3000/api/items/5cf27f7c4060be08788cfd63 HTTP/1.1
+
+
+## AUTH
+
+### Sign Up
+POST http://localhost:3000/api/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "pcjpcj2@gmail.com",
+  "password": "1q2w3e4r"
+}
+
+### Sign In
+POST http://localhost:3000/api/auth/signin HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "pcjpcj2@gmail.com",
+  "password": "1q2w3e4r"
+}
+
+### Get All users
+GET http://localhost:3000/api/users HTTP/1.1
