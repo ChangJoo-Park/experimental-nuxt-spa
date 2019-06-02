@@ -2,6 +2,7 @@ import { ObjectID } from 'mongodb'
 import { mongo } from '../database'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import config from '../../server.config'
 
 const saltRounds = 10
 const salt = bcrypt.genSaltSync(saltRounds)
@@ -38,7 +39,8 @@ const signin = async (payload) => {
     return Promise.reject(new Error('password not matched'))
   }
 
-  return Promise.resolve(user)
+  const access_token = jwt.sign({ _id: user._id, email: user.email }, config.secret)
+  return Promise.resolve({ access_token, user })
 }
 
 const findAll = () => {
