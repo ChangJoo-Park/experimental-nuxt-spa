@@ -1,26 +1,36 @@
 <template>
-  <form class="block border sahdow" @submit.prevent="$emit('on-submit', Object.assign({}, data))">
-    <h1>Hello World {{ signup }}</h1>
-    <div>
+  <form
+    class="block border sahdow"
+    @submit.prevent="$emit('on-submit', Object.assign({}, data))"
+  >
+    <div class="mb-4">
       <label for="">Email</label>
-      <input type="text" v-model="data.email">
+      <input
+        v-model="data.email"
+        type="text"
+        class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+        required
+      />
     </div>
-    <div>
+    <div class="mb-4">
       <label for="">Password</label>
-      <input type="text" v-model="data.password">
+      <input
+        v-model="data.password"
+        type="text"
+        class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+        required
+      />
     </div>
-    <input type="submit">
+    <input
+      type="submit"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      value="Submit"
+    />
   </form>
 </template>
 
 <script>
 export default {
-  props: {
-    signup: {
-      type: Boolean,
-      default: () => false
-    }
-  },
   data() {
     return {
       data: {
@@ -31,7 +41,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
