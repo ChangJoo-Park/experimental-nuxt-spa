@@ -5,7 +5,6 @@ const { users } = services
 
 router.route('/signup')
   .post(function (req, res) {
-    console.log('signup => req.body => ', req.body)
     return users.signup(req.body)
       .then(result => res.status(201).json(result))
       .catch(err => {
@@ -17,7 +16,6 @@ router.route('/signup')
 
 router.route('/signin')
   .post(function (req, res) {
-    console.log('signin => req.body => ', req.body)
     return users.signin(req.body)
       .then(result => res.status(201).json(result))
       .catch(err => {
