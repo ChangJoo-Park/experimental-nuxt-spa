@@ -2,6 +2,9 @@
   <div class="mb-4">
     <div v-if="user">
       <div>{{ user.username }}</div>
+      <div class="">
+        <button @click="tryLogout">Signout</button>
+      </div>
     </div>
     <div v-else>
       <button @click="$router.push({ name: 'login' })">Login</button>
@@ -12,11 +15,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions(['logout']),
+    tryLogout() {
+      this.logout()
+      this.$router.push('/')
+    }
   }
 }
 </script>
