@@ -22,10 +22,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
-  serverMiddleware: [
-    '~/api/logger-middleware',
-    '~/api/router-middleware'
-  ],
+  serverMiddleware: ['~/api/logger-middleware', '~/api/router-middleware'],
   /*
    ** Global CSS
    */
@@ -43,11 +40,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/eslint-module'],
 
   /*
    ** Axios module configuration

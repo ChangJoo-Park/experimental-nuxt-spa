@@ -13,7 +13,7 @@ export const createRouter = () => {
   router.use('/api/auth', auth)
   router.use('/api/users', users)
 
-  router.get('/api/status', function (req, res) {
+  router.get('/api/status', function(req, res) {
     res.status(200).json('hello world')
   })
   return router

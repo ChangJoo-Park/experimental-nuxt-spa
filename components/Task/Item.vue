@@ -1,6 +1,10 @@
 <template>
   <div class="flex flex-row">
-    <div>{{item.startDate}}/{{item.endDate}}, {{item.startTime}}/{{item.endTime}}</div>
+    <div>
+      {{ item.startDate }}/{{ item.endDate }}, {{ item.startTime }}/{{
+        item.endTime
+      }}
+    </div>
     <div class="flex-1">
       {{ item.title }}
     </div>
@@ -22,6 +26,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
