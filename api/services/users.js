@@ -36,12 +36,16 @@ const signin = async payload => {
   }
   const user = await mongo(db => db.collection('users').findOne({ email }))
   if (!user) {
-    return Promise.reject(new Error('user not found'))
+    const err = new Error('user not found')
+    err.status = 401
+    return Promise.reject(err)
   }
 
   const samePassword = bcrypt.compareSync(password, user.passwordHash)
   if (!samePassword) {
-    return Promise.reject(new Error('password not matched'))
+    const err = new Error('password not matched')
+    err.status = 401
+    return Promise.reject(err)
   }
 
   const access_token = jwt.sign(
