@@ -1,12 +1,53 @@
 <template>
-  <div>
-    <h1>Hello World</h1>
-    <new-task-input @on-submit="tryAddItem" />
+  <div class="container mx-auto px-4">
+    <new-task-input
+      class="select-none border-t-8 border-gray-700  rounded-t-lg p-4 shadow hover:shadow-xl transition-shadow"
+      @on-submit="tryAddItem"
+    />
     <div v-if="itemsCount">
+      <div class="flex justify-center mb-4 select-none">
+        <div
+          class="m-3 py-4 px-8 text-xl cursor-pointer font-bold border-b-4 rounded hover:border-b-4"
+        >
+          All
+        </div>
+        <div
+          class="m-3 py-4 px-8 text-xl cursor-pointer hover:bg-gray-400 hover:border-b-4 hover:text-white"
+        >
+          Active
+        </div>
+        <div
+          class="m-3 py-4 px-8 text-xl cursor-pointer hover:bg-gray-400 hover:border-b-4 hover:text-white"
+        >
+          Completed
+        </div>
+      </div>
       <div>
         <ul>
-          <li v-for="item in items" :key="item._id">
-            {{ item.title }}
+          <li
+            v-for="item in items"
+            :key="item._id"
+            class="border shadow mb-4 p-4 flex justify-between items-center shadow cursor-pointer transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
+          >
+            <div class="px-4">
+              <div>
+                {{ item.title }}
+              </div>
+            </div>
+            <div class="px-4">
+              <button
+                v-if="item.done"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              >
+                Undone
+              </button>
+              <button
+                v-else
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              >
+                Done
+              </button>
+            </div>
           </li>
         </ul>
       </div>

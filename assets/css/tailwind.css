@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.transition-shadow {
+  transition: box-shadow 0.2s;
+}
+
 html {
   font-family: AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;
   font-size: 16px;
