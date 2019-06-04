@@ -10,12 +10,17 @@ export default $axios => {
   const create = title => $axios.post(`/api/items/`, { title })
 
   const patchOne = (uuid, option) => {
-    return $axios.patch(`/api/items/${uuid}`)
+    return $axios.patch(`/api/items/${uuid}`, option)
   }
 
   const destroyOne = (uuid, option) => {
     return $axios.delete(`/api/items/${uuid}`)
   }
 
-  return { all, findOne, create, patchOne, destroyOne }
+  const toggleItemDone = (uuid, done) => {
+    return $axios.patch(`/api/items/${uuid}`, {
+      done: !done
+    })
+  }
+  return { all, findOne, create, patchOne, destroyOne, toggleItemDone }
 }
