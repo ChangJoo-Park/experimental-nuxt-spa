@@ -30,6 +30,12 @@ export default $axios => {
     })
   }
 
+  const changePriority = (uuid, priority) => {
+    return $axios.patch(`/api/items/${uuid}`, {
+      priority
+    })
+  }
+
   return {
     all,
     getCompleted,
@@ -38,6 +44,7 @@ export default $axios => {
     create,
     patchOne,
     destroyOne,
-    toggleItemDone
+    toggleItemDone,
+    changePriority
   }
 }

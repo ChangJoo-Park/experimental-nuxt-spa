@@ -25,33 +25,13 @@
       </div>
       <div>
         <ul>
-          <li
-            v-for="item in items"
+          <item
+            v-for="item in sortedItems"
             :key="item._id"
-            class="border rounded shadow mb-1 p-4 flex justify-between items-center shadow cursor-pointer transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
-          >
-            <div class="px-4">
-              <div class="font-medium text-lg">
-                {{ item.title }}
-              </div>
-            </div>
-            <div class="px-4">
-              <button
-                v-if="item.done"
-                class="hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-2 px-4 border border-gray-500 rounded outline-none"
-                @click="toggleDone(item)"
-              >
-                Undone
-              </button>
-              <button
-                v-else
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded outline-none"
-                @click="toggleDone(item)"
-              >
-                Done
-              </button>
-            </div>
-          </li>
+            :item="item"
+            @change-priority="changePriority"
+            @done="toggleDone"
+          />
         </ul>
       </div>
     </div>
@@ -63,6 +43,7 @@
 
 <script>
 import NewTaskInput from '~/components/Task/NewTaskInput.vue'
+import Item from '~/components/Task/Item.vue'
 
 const getItemMethod = (repo, query) => {
   const { done = '' } = query
@@ -80,7 +61,8 @@ const getItemMethod = (repo, query) => {
 
 export default {
   components: {
-    NewTaskInput
+    NewTaskInput,
+    Item
   },
   data() {
     return {
@@ -93,6 +75,12 @@ export default {
         return 0
       }
       return this.items.length
+    },
+    sortedItems() {
+      return this.items
+        .slice()
+        .sort((a, b) => a.priority - b.priority)
+        .sort((a, b) => a.done - b.done)
     }
   },
   watch: {
@@ -146,6 +134,18 @@ export default {
           }
         })
         .catch(error => console.error(error))
+    },
+    changePriority({ item, priority }) {
+      console.log('item => ', item)
+      console.log('priority => ', priority)
+      this.$repo.items
+        .changePriority(item._id, priority)
+        .then(response => {
+          // console.log(response.data)
+        })
+        .catch(e => {
+          // console.error(e)
+        })
     },
     focusNewInput(e) {
       if (e.key === '/') {

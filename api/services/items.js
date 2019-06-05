@@ -2,9 +2,9 @@ import { ObjectID } from 'mongodb'
 import { mongo } from '../database'
 
 const PRIORITY = {
-  HIGH: 'high',
-  MEDIUM: 'medium',
-  LOW: 'low'
+  HIGH: 0,
+  MEDIUM: 10,
+  LOW: 20
 }
 
 const NEW_ITEM = {
