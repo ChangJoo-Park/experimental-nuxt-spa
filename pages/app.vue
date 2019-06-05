@@ -126,8 +126,8 @@ export default {
       return this.$repo.items
         .create(title)
         .then(response => {
-          this.items.push(response.data)
           this.$refs.new.$el.querySelector('input').blur()
+          this.$router.push({ name: 'app', query: { done: 'false' } })
         })
         .catch(error => console.error(error))
     },
@@ -139,7 +139,11 @@ export default {
             return
           }
           const index = this.items.findIndex(i => i._id === item._id)
-          this.items.splice(index, 1)
+          if (this.$route.query.done === undefined) {
+            this.items[index].done = !this.items[index].done
+          } else {
+            this.items.splice(index, 1)
+          }
         })
         .catch(error => console.error(error))
     },
