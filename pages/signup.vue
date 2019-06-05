@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>SignUp</h1>
+  <div class="container mx-auto max-w-md">
+    <h1 class="font-bold uppercase my-4 text-center text-6xl">Sign Up</h1>
     <auth-form @on-submit="trySignUp" />
   </div>
 </template>

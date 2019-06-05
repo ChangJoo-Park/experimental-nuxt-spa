@@ -1,6 +1,6 @@
 <template>
   <form
-    class="block border sahdow"
+    class="block border sahdow p-4"
     @submit.prevent="$emit('on-submit', Object.assign({}, data))"
   >
     <div class="mb-4">
@@ -10,15 +10,18 @@
         type="text"
         class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
         required
+        autofocus
+        autocomplete="email"
       />
     </div>
     <div class="mb-4">
       <label for="">Password</label>
       <input
         v-model="data.password"
-        type="text"
+        type="password"
         class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
         required
+        autocomplete="password"
       />
     </div>
     <input
