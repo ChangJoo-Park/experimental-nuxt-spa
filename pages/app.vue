@@ -116,7 +116,11 @@ export default {
         .create(title)
         .then(response => {
           this.$refs.new.$el.querySelector('input').blur()
-          this.$router.push({ name: 'app', query: { done: 'false' } })
+          if (this.$route.query.done === 'true') {
+            this.$router.push({ name: 'app', query: { done: 'false' } })
+          } else {
+            this.items.push(response.data)
+          }
         })
         .catch(error => console.error(error))
     },

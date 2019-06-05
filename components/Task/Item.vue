@@ -8,6 +8,9 @@
       <div class="font-medium text-lg cursor-pointer">
         {{ item.title }}
       </div>
+      <div>
+        {{ item.doneAt }}
+      </div>
     </div>
     <div class="px-4 flex items-center justify-center relative">
       <div class="inline-block relative w-32 mr-4">
