@@ -40,7 +40,16 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/eslint-module'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/moment'
+  ],
+
+  moment: {
+    locales: ['ko']
+  },
 
   /*
    ** Axios module configuration

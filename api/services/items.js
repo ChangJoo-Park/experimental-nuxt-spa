@@ -18,6 +18,7 @@ const NEW_ITEM = {
   list: [],
   assigned: null,
   done: false,
+  doneAt: false,
   projectId: null,
   priority: PRIORITY.MEDIUM
 }
@@ -34,6 +35,7 @@ const findAll = (user, query) => {
     db
       .collection('items')
       .find(findOption)
+      .sort({ _id: -1 })
       .toArray()
   )
 }
@@ -60,11 +62,19 @@ const updateOne = payload => {
 }
 
 const patchOne = (uuid, payload) => {
+  const updatePayload = payload
+  if (updatePayload) {
+    if (updatePayload.done && updatePayload.done === true) {
+      updatePayload['doneAt'] = new Date()
+    } else if (updatePayload.done === false) {
+      updatePayload['doneAt'] = null
+    }
+  }
   return mongo(db =>
     db.collection('items').findOneAndUpdate(
       { _id: ObjectID(uuid) },
       {
-        $set: payload
+        $set: updatePayload
       }
     )
   )
