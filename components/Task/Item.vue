@@ -2,7 +2,7 @@
   <li
     :key="item._id"
     :class="{ done: item.done }"
-    class="border rounded shadow mb-1 p-4 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
+    class="border rounded shadow mb-3 p-4 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
   >
     <div class="px-4">
       <div class="font-medium text-lg cursor-pointer">
