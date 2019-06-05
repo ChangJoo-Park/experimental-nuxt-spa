@@ -6,22 +6,22 @@
       @on-submit="tryAddItem"
     />
     <div v-if="itemsCount">
-      <div class="flex justify-center mb-4 select-none">
-        <div
-          class="m-3 py-4 px-8 text-xl cursor-pointer font-bold border-b-4 hover:border-b-4"
-        >
-          All
-        </div>
-        <div
-          class="m-3 py-4 px-8 text-xl cursor-pointer hover:bg-gray-400 hover:border-b-4 hover:text-white"
+      <div id="filter-nav" class="flex justify-center mb-4 select-none">
+        <nuxt-link
+          class="filter-nav-link"
+          :to="{ name: 'app', query: { done: false } }"
         >
           Active
-        </div>
-        <div
-          class="m-3 py-4 px-8 text-xl cursor-pointer hover:bg-gray-400 hover:border-b-4 hover:text-white"
+        </nuxt-link>
+        <nuxt-link
+          class="filter-nav-link"
+          :to="{ name: 'app', query: { done: true } }"
         >
           Completed
-        </div>
+        </nuxt-link>
+        <nuxt-link class="filter-nav-link" :to="{ name: 'app' }">
+          All
+        </nuxt-link>
       </div>
       <div>
         <ul>
@@ -64,6 +64,20 @@
 <script>
 import NewTaskInput from '~/components/Task/NewTaskInput.vue'
 
+const getItemMethod = (repo, query) => {
+  const { done = '' } = query
+  switch (done) {
+    case true:
+    case 'true':
+      return repo.items.getCompleted
+    case false:
+    case 'false':
+      return repo.items.getActivated
+    default:
+      return repo.items.all
+  }
+}
+
 export default {
   components: {
     NewTaskInput
@@ -81,15 +95,21 @@ export default {
       return this.items.length
     }
   },
-  asyncData({ app: { $repo } }) {
-    return $repo.items
-      .all()
-      .then(response => {
-        return {
-          items: response.data
-        }
-      })
-      .catch(error => console.errro(error))
+  watch: {
+    async $route(newRoute, oldRoute) {
+      const response = await getItemMethod(this.$repo, newRoute.query)()
+      this.items = response.data
+    }
+  },
+  async asyncData({ app, params, query, error }) {
+    try {
+      const response = await getItemMethod(app.$repo, query)()
+      return {
+        items: response.data
+      }
+    } catch (err) {
+      return error(err)
+    }
   },
   mounted() {
     window.addEventListener('keyup', this.focusNewInput)
@@ -119,7 +139,7 @@ export default {
             return
           }
           const index = this.items.findIndex(i => i._id === item._id)
-          this.items[index].done = !item.done
+          this.items.splice(index, 1)
         })
         .catch(error => console.error(error))
     },
@@ -131,3 +151,12 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss">
+#filter-nav .nuxt-link-exact-active {
+  @apply font-bold border-b-4;
+}
+#filter-nav .filter-nav-link {
+  @apply m-3 py-4 px-8 text-xl cursor-pointer;
+}
+</style>
