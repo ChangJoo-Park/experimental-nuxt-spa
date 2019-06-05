@@ -22,11 +22,18 @@ const NEW_ITEM = {
   priority: PRIORITY.MEDIUM
 }
 
-const findAll = user => {
+const findAll = (user, query) => {
+  const { done = '' } = query
+  const findOption = { userId: user._id }
+
+  if ((done === 'true' || done === 'false')) {
+    findOption['done'] = done === 'true'
+  }
+
   return mongo(db =>
     db
       .collection('items')
-      .find({ userId: user._id })
+      .find(findOption)
       .toArray()
   )
 }

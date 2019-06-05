@@ -3,6 +3,13 @@ export default $axios => {
     return $axios.get(`/api/items/`)
   }
 
+  const getCompleted = () => {
+    return $axios.get(`/api/items?done=true`)
+  }
+  const getActivated = () => {
+    return $axios.get(`/api/items?done=false`)
+  }
+
   const findOne = (uuid, option) => {
     return $axios.get(`/api/items/${uuid}`)
   }
@@ -22,5 +29,15 @@ export default $axios => {
       done: !done
     })
   }
-  return { all, findOne, create, patchOne, destroyOne, toggleItemDone }
+
+  return {
+    all,
+    getCompleted,
+    getActivated,
+    findOne,
+    create,
+    patchOne,
+    destroyOne,
+    toggleItemDone
+  }
 }
