@@ -5,24 +5,25 @@
       class="select-none border-t-8 border-gray-700  rounded-t-lg p-4 shadow hover:shadow-xl transition-shadow"
       @on-submit="tryAddItem"
     />
+    <div id="filter-nav" class="flex justify-center mb-4 select-none">
+      <nuxt-link
+        class="filter-nav-link"
+        :to="{ name: 'app', query: { done: false } }"
+      >
+        Active
+      </nuxt-link>
+      <nuxt-link
+        class="filter-nav-link"
+        :to="{ name: 'app', query: { done: true } }"
+      >
+        Completed
+      </nuxt-link>
+      <nuxt-link class="filter-nav-link" :to="{ name: 'app' }">
+        All
+      </nuxt-link>
+    </div>
+
     <div v-if="itemsCount">
-      <div id="filter-nav" class="flex justify-center mb-4 select-none">
-        <nuxt-link
-          class="filter-nav-link"
-          :to="{ name: 'app', query: { done: false } }"
-        >
-          Active
-        </nuxt-link>
-        <nuxt-link
-          class="filter-nav-link"
-          :to="{ name: 'app', query: { done: true } }"
-        >
-          Completed
-        </nuxt-link>
-        <nuxt-link class="filter-nav-link" :to="{ name: 'app' }">
-          All
-        </nuxt-link>
-      </div>
       <div>
         <ul>
           <item
