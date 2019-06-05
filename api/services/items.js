@@ -26,8 +26,8 @@ const findAll = (user, query) => {
   const { done = '' } = query
   const findOption = { userId: user._id }
 
-  if ((done === 'true' || done === 'false')) {
-    findOption['done'] = done === 'true'
+  if (done === 'true' || done === 'false') {
+    findOption.done = done === 'true'
   }
 
   return mongo(db =>

@@ -46,7 +46,7 @@
         class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-2 px-4 border border-gray-500 rounded outline-none"
         @click="$emit('done', item)"
       >
-        Undone
+        Todo
       </button>
       <button
         v-else
