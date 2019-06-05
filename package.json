@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/moment": "^1.2.0",
     "@nuxtjs/pwa": "^2.6.0",
     "agenda": "^2.0.2",
     "bcrypt": "^3.0.6",
@@ -25,6 +26,7 @@
     "express": "^4.16.4",
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongodb": "^3.2.6",
     "nuxt": "^2.4.0"
   },

@@ -8,8 +8,8 @@
       <div class="font-medium text-lg cursor-pointer">
         {{ item.title }}
       </div>
-      <div>
-        {{ item.doneAt }}
+      <div v-if="item.done">
+        {{ doneAt }}
       </div>
     </div>
     <div class="px-4 flex items-center justify-center relative">
@@ -73,6 +73,9 @@ export default {
   computed: {
     priorityClass() {
       return `priority-${this.item.priority}`
+    },
+    doneAt() {
+      return `${this.$moment(this.item.doneAt).fromNow()} 완료함`
     }
   },
   watch: {

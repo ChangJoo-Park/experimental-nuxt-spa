@@ -54,22 +54,22 @@
       <div>
         <template v-if="user">
           <button
-            @click="tryLogout"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            @click="tryLogout"
           >
             Signout
           </button>
         </template>
         <template v-else>
           <button
-            @click="$router.push({ name: 'login' })"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            @click="$router.push({ name: 'login' })"
           >
             Login
           </button>
           <button
-            @click="$router.push({ name: 'signup' })"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            @click="$router.push({ name: 'signup' })"
           >
             SignUp
           </button>
