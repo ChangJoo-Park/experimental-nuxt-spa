@@ -50,13 +50,11 @@ const findOneByUUID = uuid => {
 }
 
 const create = (user, { title, list }) => {
-  console.log('create => list ', list)
   const newItem = NEW_ITEM
   newItem._id = new ObjectID()
   newItem.userId = ObjectID(user._id)
   newItem.listId = list
   newItem.title = title
-  console.log('newItem => ', newItem)
   return mongo(db => db.collection('items').insertOne(newItem))
     .then(({ ok, ops }) => ops[0])
     .catch(error => {

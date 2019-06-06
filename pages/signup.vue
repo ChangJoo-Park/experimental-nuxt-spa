@@ -14,11 +14,9 @@ export default {
   },
   methods: {
     trySignUp(payload) {
-      console.log('payload => ', payload)
       this.$repo.auth
         .signup(payload)
         .then(result => {
-          console.log(result)
           this.$router.push({ name: 'login' })
         })
         .catch(error => {
