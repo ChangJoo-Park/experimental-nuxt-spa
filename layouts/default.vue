@@ -2,15 +2,7 @@
   <div>
     <navbar />
     <div class="min-h-screen md:flex">
-      <div
-        v-if="showSidebar"
-        class="flex-none w-full md:max-w-xs bg-purple-500"
-      >
-        <button>New List</button>
-        <ul>
-          <li>Inbox</li>
-        </ul>
-      </div>
+      <sidebar v-if="showSidebar" />
       <div class="flex-1 container mx-auto">
         <nuxt />
       </div>
@@ -20,10 +12,12 @@
 
 <script>
 import Navbar from '~/components/Navbar.vue'
+import Sidebar from '~/components/Common/Sidebar.vue'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Sidebar
   },
   data() {
     return {
