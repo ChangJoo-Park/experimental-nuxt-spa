@@ -65,9 +65,9 @@ const patchOne = (uuid, payload) => {
   const updatePayload = payload
   if (updatePayload) {
     if (updatePayload.done && updatePayload.done === true) {
-      updatePayload['doneAt'] = new Date()
+      updatePayload.doneAt = new Date()
     } else if (updatePayload.done === false) {
-      updatePayload['doneAt'] = null
+      updatePayload.doneAt = null
     }
   }
   return mongo(db =>

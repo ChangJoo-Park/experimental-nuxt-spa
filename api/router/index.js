@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import items from './items'
 import auth from './auth'
 import users from './users'
+import lists from './lists'
 
 export const createRouter = () => {
   const router = express.Router()
@@ -12,6 +13,7 @@ export const createRouter = () => {
   router.use('/api/items', items)
   router.use('/api/auth', auth)
   router.use('/api/users', users)
+  router.use('/api/lists', lists)
 
   router.get('/api/status', function(req, res) {
     res.status(200).json('hello world')
