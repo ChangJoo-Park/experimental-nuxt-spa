@@ -1,10 +1,12 @@
 <template>
-  <div class="container">
-    <h1 class="text-6xl">Hello World</h1>
+  <div class="container mx-auto">
     <div v-if="user">
-      <button @click="$router.push({ name: 'app', query: { done: false } })">
+      <nuxt-link
+        :to="{ name: 'app', query: { done: false } }"
+        class="hover:underline text-blue-500"
+      >
         앱으로
-      </button>
+      </nuxt-link>
     </div>
   </div>
 </template>
