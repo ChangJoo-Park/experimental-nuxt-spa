@@ -18,17 +18,22 @@ const NEW_ITEM = {
   list: [],
   assigned: null,
   done: false,
-  doneAt: false,
-  projectId: null,
+  doneAt: null,
+  listId: null,
   priority: PRIORITY.MEDIUM
 }
 
 const findAll = (user, query) => {
-  const { done = '' } = query
+  const { done = '', list = null } = query
   const findOption = { userId: user._id }
-
   if (done === 'true' || done === 'false') {
     findOption.done = done === 'true'
+  }
+
+  if (list !== null) {
+    findOption.listId = list
+  } else {
+    findOption.listId = null
   }
 
   return mongo(db =>
@@ -44,10 +49,12 @@ const findOneByUUID = uuid => {
   return mongo(db => db.collection('items').findOne({ _id: ObjectID(uuid) }))
 }
 
-const create = (user, { title }) => {
+const create = (user, { title, list }) => {
+  console.log('create => list ', list)
   const newItem = NEW_ITEM
   newItem._id = new ObjectID()
   newItem.userId = ObjectID(user._id)
+  newItem.listId = list
   newItem.title = title
   console.log('newItem => ', newItem)
   return mongo(db => db.collection('items').insertOne(newItem))

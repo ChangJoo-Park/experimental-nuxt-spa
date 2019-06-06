@@ -1,20 +1,28 @@
+// FIXME: queryString 만들기 수정
+const makeItemsQuery = query => {
+  const { done = '', list = null } = query
+  const doneQuery = done ? `done=${done}` : ''
+  const listQuery = list ? `list=${list}` : ''
+  const joinQuery = [doneQuery, listQuery].filter(q => !!q).join('&')
+  return joinQuery ? `?${joinQuery}` : ''
+}
 export default $axios => {
-  const all = () => {
-    return $axios.get(`/api/items/`)
+  const all = query => {
+    return $axios.get(`/api/items${makeItemsQuery(query)}`)
   }
 
-  const getCompleted = () => {
-    return $axios.get(`/api/items?done=true`)
+  const getCompleted = query => {
+    return $axios.get(`/api/items${makeItemsQuery(query)}`)
   }
-  const getActivated = () => {
-    return $axios.get(`/api/items?done=false`)
+  const getActivated = query => {
+    return $axios.get(`/api/items${makeItemsQuery(query)}`)
   }
 
   const findOne = (uuid, option) => {
     return $axios.get(`/api/items/${uuid}`)
   }
 
-  const create = title => $axios.post(`/api/items/`, { title })
+  const create = (title, list) => $axios.post(`/api/items/`, { title, list })
 
   const patchOne = (uuid, option) => {
     return $axios.patch(`/api/items/${uuid}`, option)

@@ -15,7 +15,6 @@ export const mutations = {
 export const actions = {
   async nuxtClientInit(context) {
     const key = Cookies.get('authorization')
-    console.log('key => ', key)
     if (key) {
       try {
         const response = await axios.get('/api/auth/me', {

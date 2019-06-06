@@ -8,17 +8,20 @@
     <div id="filter-nav" class="flex justify-center mb-4 select-none">
       <nuxt-link
         class="filter-nav-link"
-        :to="{ name: 'app', query: { done: false } }"
+        :to="{ name: 'app', query: getQuery('active') }"
       >
         Active
       </nuxt-link>
       <nuxt-link
         class="filter-nav-link"
-        :to="{ name: 'app', query: { done: true } }"
+        :to="{ name: 'app', query: getQuery('completed') }"
       >
         Completed
       </nuxt-link>
-      <nuxt-link class="filter-nav-link" :to="{ name: 'app' }">
+      <nuxt-link
+        class="filter-nav-link"
+        :to="{ name: 'app', query: getQuery('all') }"
+      >
         All
       </nuxt-link>
     </div>
@@ -86,13 +89,14 @@ export default {
   },
   watch: {
     async $route(newRoute, oldRoute) {
-      const response = await getItemMethod(this.$repo, newRoute.query)()
+      const { query } = newRoute
+      const response = await getItemMethod(this.$repo, query)(query)
       this.items = response.data
     }
   },
   async asyncData({ app, params, query, error }) {
     try {
-      const response = await getItemMethod(app.$repo, query)()
+      const response = await getItemMethod(app.$repo, query)(query)
       return {
         items: response.data
       }
@@ -107,13 +111,30 @@ export default {
     window.removeEventListener('keyup', this.focusNewInput)
   },
   methods: {
+    getQuery(type) {
+      const query = {}
+      switch (type) {
+        case 'active':
+          query.done = false
+          break
+        case 'completed':
+          query.done = true
+          break
+        default:
+          break
+      }
+      if (this.$route.query.list) {
+        query.list = this.$route.query.list
+      }
+      return query
+    },
     tryAddItem(title) {
       if (!title) {
         return
       }
 
       return this.$repo.items
-        .create(title)
+        .create(title, this.$route.query.list)
         .then(response => {
           this.$refs.new.$el.querySelector('input').blur()
           if (this.$route.query.done === 'true') {
@@ -141,8 +162,6 @@ export default {
         .catch(error => console.error(error))
     },
     changePriority({ item, priority }) {
-      console.log('item => ', item)
-      console.log('priority => ', priority)
       this.$repo.items
         .changePriority(item._id, priority)
         .then(response => {

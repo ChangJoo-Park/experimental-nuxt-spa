@@ -1,9 +1,10 @@
 import { ObjectID } from 'mongodb'
 import { mongo } from '../database'
 
-const NEW_PROJECT = {
+const NEW_LIST = {
   _id: null,
   userId: null,
+  title: '',
   members: []
 }
 
@@ -20,11 +21,10 @@ const findAll = (user, query) => {
 }
 
 const create = (user, { title }) => {
-  const newItem = NEW_PROJECT
+  const newItem = NEW_LIST
   newItem._id = new ObjectID()
   newItem.userId = ObjectID(user._id)
   newItem.title = title
-  console.log('newItem => ', newItem)
   return mongo(db => db.collection('lists').insertOne(newItem))
     .then(({ ok, ops }) => ops[0])
     .catch(error => {

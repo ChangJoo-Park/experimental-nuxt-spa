@@ -50,3 +50,18 @@ Content-Type: application/json
 
 ### Get All users
 GET http://localhost:3000/api/users HTTP/1.1
+
+
+### Get All users lists
+GET http://localhost:3000/api/lists HTTP/1.1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Y1Mzg5NTk2MTY0MzIyZjhhOTAwMzgiLCJlbWFpbCI6InBjanBjajJAZ21haWwuY29tIiwiaWF0IjoxNTU5ODAzNDkxfQ.rAUFpqDV_XJqzRDM1uJQdbJavAHNBq3ejp_ozTmm6jk
+Content-Type: application/json
+
+### Create One List
+POST http://localhost:3000/api/lists HTTP/1.1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Y1Mzg5NTk2MTY0MzIyZjhhOTAwMzgiLCJlbWFpbCI6InBjanBjajJAZ21haWwuY29tIiwiaWF0IjoxNTU5ODAzNDkxfQ.rAUFpqDV_XJqzRDM1uJQdbJavAHNBq3ejp_ozTmm6jk
+Content-Type: application/json
+
+{
+  "title": "HELLO WORLD"
+}

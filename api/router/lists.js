@@ -9,7 +9,7 @@ router
   .route('/')
   .get([auth.authenticated], function(req, res) {
     return lists
-      .findAll(res.locals.user, req.query)
+      .findAll(res.locals.user)
       .then(result => res.status(200).json(result))
   })
   .post([auth.authenticated], function(req, res) {

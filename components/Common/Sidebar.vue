@@ -8,15 +8,42 @@
       </button>
     </div>
     <ul class="list-none">
-      <li
+      <nuxt-link
         class="text-xl font-bold select-none cursor-pointer p-4 hover:underline hover:bg-blue-500 hover:text-white"
+        tag="li"
+        :to="{ name: 'app', query: { done: false } }"
       >
         Inbox
-      </li>
+      </nuxt-link>
+      <nuxt-link
+        v-for="list in lists"
+        :key="list._id"
+        class="text-xl font-bold select-none cursor-pointer p-4 hover:underline hover:bg-blue-500 hover:text-white"
+        tag="li"
+        :to="{ name: 'app', query: { done: false, list: list._id } }"
+      >
+        {{ list.title }}
+      </nuxt-link>
     </ul>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      lists: []
+    }
+  },
+  mounted() {
+    this.$repo.lists
+      .all()
+      .then(response => {
+        this.lists = response.data
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }
+}
 </script>
