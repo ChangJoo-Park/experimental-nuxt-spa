@@ -74,9 +74,12 @@ export default {
       return this.$repo.items
         .create(title)
         .then(response => {
-          // TODO: state에 따라 다르게 조작해야함
           this.$refs.new.$el.querySelector('input').blur()
-          this.items.push(response.data)
+          if (this.state === 'active') {
+            this.items.unshift(response.data)
+          } else {
+            this.state = 'active'
+          }
         })
         .catch(error => console.error(error))
     },
