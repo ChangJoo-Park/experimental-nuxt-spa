@@ -60,7 +60,6 @@ export default {
     }
   },
   async asyncData({ app }) {
-    console.log('inbox')
     const { data } = await app.$repo.items.find({ done: false })
     return {
       items: data,

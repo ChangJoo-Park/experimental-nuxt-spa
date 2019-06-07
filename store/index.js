@@ -49,7 +49,6 @@ export const actions = {
     commit('SET_USER', null)
   },
   setItems({ commit }, payload) {
-    console.log('commit set items => ', payload)
     commit('SET_ITEMS', payload)
   }
 }
