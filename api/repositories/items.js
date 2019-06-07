@@ -1,21 +1,8 @@
-// FIXME: queryString 만들기 수정
-const makeItemsQuery = query => {
-  const { done = '', list = null } = query
-  const doneQuery = done ? `done=${done}` : ''
-  const listQuery = list ? `list=${list}` : ''
-  const joinQuery = [doneQuery, listQuery].filter(q => !!q).join('&')
-  return joinQuery ? `?${joinQuery}` : ''
-}
+import qs from 'qs'
+
 export default $axios => {
   const find = query => {
-    return $axios.get(`/api/items`)
-  }
-
-  const getCompleted = query => {
-    return $axios.get(`/api/items${makeItemsQuery(query)}`)
-  }
-  const getActivated = query => {
-    return $axios.get(`/api/items${makeItemsQuery(query)}`)
+    return $axios.get(`/api/items?${qs.stringify(query)}`)
   }
 
   const findOne = (uuid, option) => {
@@ -46,8 +33,6 @@ export default $axios => {
 
   return {
     find,
-    getCompleted,
-    getActivated,
     findOne,
     create,
     patchOne,

@@ -6,13 +6,28 @@
       @on-submit="tryAddItem"
     />
     <div id="filter-nav" class="flex justify-center mb-4 select-none">
-      <button class="filter-nav-link" :to="{ name: 'app-inbox' }">
+      <button
+        class="filter-nav-link"
+        :class="{ active: currentState('active') }"
+        :to="{ name: 'app-inbox' }"
+        @click="state = 'active'"
+      >
         Active
       </button>
-      <button class="filter-nav-link" :to="{ name: 'app-inbox' }">
+      <button
+        class="filter-nav-link"
+        :class="{ active: currentState('completed') }"
+        :to="{ name: 'app-inbox' }"
+        @click="state = 'completed'"
+      >
         Completed
       </button>
-      <button class="filter-nav-link" :to="{ name: 'app-inbox' }">
+      <button
+        class="filter-nav-link"
+        :class="{ active: currentState('all') }"
+        :to="{ name: 'app-inbox' }"
+        @click="state = 'all'"
+      >
         All
       </button>
     </div>
@@ -25,16 +40,32 @@ import NewTaskInput from '~/components/Task/NewTaskInput.vue'
 import TaskList from '~/components/Task/List.vue'
 
 export default {
+  components: {
+    NewTaskInput,
+    TaskList
+  },
+  watch: {
+    async state(newState) {
+      const query = {}
+      switch (newState) {
+        case 'active':
+          query.done = false
+          break
+        case 'completed':
+          query.done = true
+          break
+      }
+      const { data } = await this.$repo.items.find(query)
+      this.items = data
+    }
+  },
   async asyncData({ app }) {
-    const { data } = await app.$repo.items.find()
+    console.log('inbox')
+    const { data } = await app.$repo.items.find({ done: false })
     return {
       items: data,
       state: 'active'
     }
-  },
-  components: {
-    NewTaskInput,
-    TaskList
   },
   methods: {
     tryAddItem(title) {
@@ -49,6 +80,9 @@ export default {
           this.items.push(response.data)
         })
         .catch(error => console.error(error))
+    },
+    currentState(value) {
+      return value === this.state
     }
   }
 }

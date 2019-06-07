@@ -28,7 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongodb": "^3.2.6",
-    "nuxt": "^2.4.0"
+    "nuxt": "^2.4.0",
+    "qs": "^6.7.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

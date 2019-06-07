@@ -57,10 +57,10 @@ export default {
 </script>
 
 <style lang="postcss">
-#filter-nav .nuxt-link-exact-active {
+#filter-nav .active {
   @apply font-bold border-b-4;
 }
 #filter-nav .filter-nav-link {
-  @apply m-3 py-4 px-8 text-xl cursor-pointer;
+  @apply m-3 py-4 px-8 text-xl cursor-pointer outline-none;
 }
 </style>
