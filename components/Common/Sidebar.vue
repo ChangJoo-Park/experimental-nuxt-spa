@@ -10,8 +10,8 @@
     </div>
     <div
       v-if="openNewListForm"
-      class="m-4 p-4 bg-white shadow"
       key="newListForm"
+      class="m-4 p-4 bg-white shadow"
     >
       <div class="mb-4">
         <label for="">New List Name</label>
@@ -39,7 +39,15 @@
       <nuxt-link
         class="text-xl font-bold select-none cursor-pointer p-4 hover:underline hover:bg-blue-500 hover:text-white"
         tag="li"
-        :to="{ name: 'app', query: { done: false } }"
+        :to="{ name: 'app-dashboard' }"
+      >
+        Home
+      </nuxt-link>
+
+      <nuxt-link
+        class="text-xl font-bold select-none cursor-pointer p-4 hover:underline hover:bg-blue-500 hover:text-white"
+        tag="li"
+        :to="{ name: 'app-inbox' }"
       >
         Inbox
       </nuxt-link>
@@ -48,7 +56,7 @@
         :key="list._id"
         class="text-xl font-bold select-none cursor-pointer p-4 hover:underline hover:bg-blue-500 hover:text-white"
         tag="li"
-        :to="{ name: 'app', query: { done: false, list: list._id } }"
+        :to="{ name: 'app-list', params: { list: list._id } }"
       >
         {{ list.title }}
       </nuxt-link>
@@ -99,7 +107,7 @@ export default {
 </script>
 
 <style lang="postcss">
-#sidebar .nuxt-link-exact-active {
+#sidebar .nuxt-link-active {
   @apply bg-blue-600 text-white no-underline;
 }
 </style>

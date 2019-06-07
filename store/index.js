@@ -2,13 +2,16 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 
 export const state = () => ({
-  list: [],
+  items: [],
   user: null
 })
 
 export const mutations = {
   SET_USER(state, payload) {
     state.user = payload
+  },
+  SET_ITEMS(state, payload) {
+    state.items = payload
   }
 }
 
@@ -44,9 +47,14 @@ export const actions = {
   logout({ commit }) {
     Cookies.remove('authorization')
     commit('SET_USER', null)
+  },
+  setItems({ commit }, payload) {
+    console.log('commit set items => ', payload)
+    commit('SET_ITEMS', payload)
   }
 }
 
 export const getters = {
-  user: state => state.user
+  user: state => state.user,
+  items: state => state.items
 }

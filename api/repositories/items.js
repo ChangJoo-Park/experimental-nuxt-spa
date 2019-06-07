@@ -7,8 +7,8 @@ const makeItemsQuery = query => {
   return joinQuery ? `?${joinQuery}` : ''
 }
 export default $axios => {
-  const all = query => {
-    return $axios.get(`/api/items${makeItemsQuery(query)}`)
+  const find = query => {
+    return $axios.get(`/api/items`)
   }
 
   const getCompleted = query => {
@@ -45,7 +45,7 @@ export default $axios => {
   }
 
   return {
-    all,
+    find,
     getCompleted,
     getActivated,
     findOne,

@@ -22,6 +22,12 @@ export default {
       title: ''
     }
   },
+  mounted() {
+    window.addEventListener('keyup', this.focusNewInput)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.focusNewInput)
+  },
   methods: {
     trySubmit() {
       this.$emit('on-submit', this.title)
