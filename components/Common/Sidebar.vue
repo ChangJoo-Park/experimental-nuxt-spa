@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar" class="flex-none w-full md:max-w-xs bg-gray-200">
+  <div id="sidebar" class="flex-none w-full md:max-w-xs bg-blue-100">
     <ul class="list-none">
       <nuxt-link
         class="text-lg select-none cursor-pointer p-4 hover:bg-blue-500 hover:text-white"
@@ -20,21 +20,21 @@
       <nuxt-link
         v-for="list in lists"
         :key="list._id"
-        class="list select-none p-4 hover:bg-blue-500 hover:text-white flex justify-between items-center"
+        class="list cursor-pointer select-none p-4 hover:bg-blue-500 hover:text-white flex justify-between items-center"
         tag="li"
         :to="{ name: 'app-list', params: { list: list._id } }"
       >
-        <div class="flex-1 cursor-pointer">
+        <div class="flex-1">
           {{ list.title }}
         </div>
         <div class="list-action text-xs opacity-0">
           <button
-            class="hover:text-black hover:bg-white px-2 py-1 border rounded"
+            class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
           >
             수정
           </button>
           <button
-            class="hover:text-white hover:bg-red-600 hover:border-red-700 px-2 py-1 border rounded"
+            class="hover:text-white hover:bg-red-600 hover:border-red-700 px-2 py-1 border rounded outline-none"
           >
             삭제
           </button>
