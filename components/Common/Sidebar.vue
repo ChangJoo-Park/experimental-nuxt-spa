@@ -22,18 +22,20 @@
           autofocus
         />
       </div>
-      <button
-        class="border border-gray-500 rounded px-4 py-2 text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
-        @click="openNewListForm = false"
-      >
-        Cancel
-      </button>
-      <button
-        class="border border-white-500 rounded px-4 py-2 text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
-        @click="tryCreateList"
-      >
-        Submit
-      </button>
+      <div>
+        <button
+          class="border border-white-500 rounded px-4 py-2 text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
+          @click="tryCreateList"
+        >
+          Submit
+        </button>
+        <button
+          class="border border-gray-500 rounded px-4 py-2 text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
+          @click="openNewListForm = false"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
     <ul class="list-none">
       <nuxt-link

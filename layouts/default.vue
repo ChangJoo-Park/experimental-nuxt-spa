@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar />
-    <div class="min-h-screen md:flex">
+    <div class="md:flex" style="min-height: calc(100vh - 80px)">
       <sidebar v-if="showSidebar" />
       <div class="flex-1 container mx-auto">
         <nuxt />
