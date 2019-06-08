@@ -30,7 +30,16 @@ export default {
     }
   },
   methods: {
-    changePriority() {},
+    changePriority({ item, priority }) {
+      this.$repo.items
+        .changePriority(item._id, priority)
+        .then(response => {
+          // console.log(response.data)
+        })
+        .catch(e => {
+          // console.error(e)
+        })
+    },
     toggleDone(item) {
       return this.$repo.items
         .toggleItemDone(item._id, item.done)
