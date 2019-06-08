@@ -49,3 +49,12 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss">
+#filter-nav .active {
+  @apply font-bold border-b-4;
+}
+#filter-nav .filter-nav-link {
+  @apply m-3 py-2 px-2 cursor-pointer outline-none;
+}
+</style>
