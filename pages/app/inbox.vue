@@ -5,48 +5,23 @@
       class="select-none border-t-8 border-gray-700  rounded-t-lg p-4 shadow hover:shadow-xl transition-shadow"
       @on-submit="tryAddItem"
     />
-    <div id="filter-nav" class="flex justify-center mb-4 select-none">
-      <button
-        v-for="nav in navs"
-        :key="nav.state"
-        class="filter-nav-link"
-        :class="{ active: currentState(nav.state) }"
-        :to="{ name: 'app-inbox' }"
-        @click="state = nav.state"
-      >
-        {{ nav.label }}
-      </button>
-    </div>
+
+    <item-filter :state="state" @update-state="updateState" />
+
     <task-list :items="items" @toggle-done="toggleDone" />
   </div>
 </template>
 
 <script>
 import NewTaskInput from '~/components/Task/NewTaskInput.vue'
+import ItemFilter from '~/components/Task/Filter.vue'
 import TaskList from '~/components/Task/List.vue'
 
 export default {
   components: {
     NewTaskInput,
-    TaskList
-  },
-  data() {
-    return {
-      navs: [
-        {
-          state: 'active',
-          label: 'Active'
-        },
-        {
-          state: 'completed',
-          label: 'Completed'
-        },
-        {
-          state: 'all',
-          label: 'All'
-        }
-      ]
-    }
+    TaskList,
+    ItemFilter
   },
   watch: {
     async state(newState) {
@@ -71,6 +46,9 @@ export default {
     }
   },
   methods: {
+    updateState(state) {
+      this.state = state
+    },
     tryAddItem(title) {
       if (!title) {
         return
@@ -94,9 +72,6 @@ export default {
       } else {
         this.items.splice(index, 1)
       }
-    },
-    currentState(value) {
-      return value === this.state
     }
   }
 }
