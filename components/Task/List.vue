@@ -31,7 +31,17 @@ export default {
   },
   methods: {
     changePriority() {},
-    toggleDone() {}
+    toggleDone(item) {
+      return this.$repo.items
+        .toggleItemDone(item._id, item.done)
+        .then(response => {
+          if (!response.data.ok) {
+            return
+          }
+          this.$emit('toggle-done', item)
+        })
+        .catch(error => console.error(error))
+    }
   }
 }
 </script>

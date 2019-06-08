@@ -7,31 +7,17 @@
     />
     <div id="filter-nav" class="flex justify-center mb-4 select-none">
       <button
+        v-for="nav in navs"
+        :key="nav.state"
         class="filter-nav-link"
-        :class="{ active: currentState('active') }"
+        :class="{ active: currentState(nav.state) }"
         :to="{ name: 'app-inbox' }"
-        @click="state = 'active'"
+        @click="state = nav.state"
       >
-        Active
-      </button>
-      <button
-        class="filter-nav-link"
-        :class="{ active: currentState('completed') }"
-        :to="{ name: 'app-inbox' }"
-        @click="state = 'completed'"
-      >
-        Completed
-      </button>
-      <button
-        class="filter-nav-link"
-        :class="{ active: currentState('all') }"
-        :to="{ name: 'app-inbox' }"
-        @click="state = 'all'"
-      >
-        All
+        {{ nav.label }}
       </button>
     </div>
-    <task-list :items="items" />
+    <task-list :items="items" @toggle-done="toggleDone" />
   </div>
 </template>
 
@@ -43,6 +29,24 @@ export default {
   components: {
     NewTaskInput,
     TaskList
+  },
+  data() {
+    return {
+      navs: [
+        {
+          state: 'active',
+          label: 'Active'
+        },
+        {
+          state: 'completed',
+          label: 'Completed'
+        },
+        {
+          state: 'all',
+          label: 'All'
+        }
+      ]
+    }
   },
   watch: {
     async state(newState) {
@@ -82,6 +86,14 @@ export default {
           }
         })
         .catch(error => console.error(error))
+    },
+    toggleDone(item) {
+      const index = this.items.findIndex(i => i._id === item._id)
+      if (this.state === 'all') {
+        this.items[index].done = !this.items[index].done
+      } else {
+        this.items.splice(index, 1)
+      }
     },
     currentState(value) {
       return value === this.state

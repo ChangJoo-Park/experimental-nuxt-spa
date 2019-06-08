@@ -2,10 +2,10 @@
   <li
     :key="item._id"
     :class="{ done: item.done }"
-    class="border rounded shadow mb-3 p-4 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
+    class="border rounded shadow mb-3 p-1 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
   >
     <div class="px-4">
-      <div class="font-medium text-lg cursor-pointer">
+      <div class="font-medium cursor-pointer">
         {{ item.title }}
       </div>
       <div v-if="item.done">
@@ -13,10 +13,10 @@
       </div>
     </div>
     <div class="px-4 flex items-center justify-center relative">
-      <div class="inline-block relative w-32 mr-4">
+      <div class="inline-block relative w-32 mr-4 text-xs">
         <select
           v-model="item.priority"
-          class="text-sm text-center uppercase block appearance-none w-full bg-white px-4 py-2 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+          class="text-xs text-center uppercase block appearance-none w-full bg-white px-2 py-1 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
           :class="priorityClass"
         >
           <option value="0">
@@ -46,14 +46,14 @@
 
       <button
         v-if="item.done"
-        class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-2 px-4 border border-gray-500 rounded outline-none"
+        class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2 text-xs border border-gray-500 rounded outline-none"
         @click="$emit('done', item)"
       >
         Todo
       </button>
       <button
         v-else
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded outline-none"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 text-xs border border-blue-700 rounded outline-none"
         @click="$emit('done', item)"
       >
         Done
