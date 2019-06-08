@@ -61,6 +61,6 @@ export default {
   @apply font-bold border-b-4;
 }
 #filter-nav .filter-nav-link {
-  @apply m-3 py-4 px-8 text-xl cursor-pointer outline-none;
+  @apply m-3 py-2 px-2 cursor-pointer outline-none;
 }
 </style>
