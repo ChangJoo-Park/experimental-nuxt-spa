@@ -1,7 +1,7 @@
 <template>
   <ul>
     <item
-      v-for="item in items"
+      v-for="item in sortedItems"
       :key="item._id"
       :item="item"
       @change-priority="changePriority"
@@ -26,7 +26,10 @@ export default {
   },
   computed: {
     sortedItems() {
-      return []
+      return this.items
+        .slice()
+        .sort((a, b) => a.priority - b.priority)
+        .sort((a, b) => a.done - b.done)
     }
   },
   methods: {

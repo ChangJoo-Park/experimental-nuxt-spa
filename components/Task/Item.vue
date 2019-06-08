@@ -8,7 +8,7 @@
       <div class="font-medium cursor-pointer">
         {{ item.title }}
       </div>
-      <div v-if="item.done">
+      <div v-if="item.done" class="text-xs text-gray-500">
         {{ doneAt }}
       </div>
     </div>
