@@ -114,7 +114,17 @@
           </form>
         </div>
         <div slot="footer" class="p-4">
-          <button class="p-2 border rounded" @click="modalOpen = false">
+          <button
+            class="px-4 p-2 border rounded bg-blue-400 text-white outline-none"
+            @click="modalOpen = false"
+          >
+            Save
+          </button>
+
+          <button
+            class="px-4 p-2 border rounded outline-none"
+            @click="modalOpen = false"
+          >
             Close
           </button>
         </div>
