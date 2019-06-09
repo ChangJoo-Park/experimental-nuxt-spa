@@ -11,6 +11,7 @@ const NEW_ITEM = {
   _id: null,
   userId: null,
   title: '',
+  note: '',
   startDate: null,
   endDate: null,
   startTime: null,

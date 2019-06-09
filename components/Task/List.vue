@@ -1,13 +1,15 @@
 <template>
-  <ul v-if="sortedItems && sortedItems.length">
-    <item
-      v-for="item in sortedItems"
-      :key="item._id"
-      :item="item"
-      @change-priority="changePriority"
-      @done="toggleDone"
-    />
-  </ul>
+  <div v-if="sortedItems && sortedItems.length">
+    <ul>
+      <item
+        v-for="item in sortedItems"
+        :key="item._id"
+        :item="item"
+        @change-priority="changePriority"
+        @done="toggleDone"
+      />
+    </ul>
+  </div>
   <div v-else class="flex items-center justify-center" style="height: 300px;">
     <div class="text-6xl font-mono text-gray-700">There is no items</div>
   </div>
