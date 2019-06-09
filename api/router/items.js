@@ -25,7 +25,12 @@ router
       .findOneByUUID(req.params.itemId)
       .then(result => res.status(200).json(result))
   })
-  .put(function(req, res) {})
+  .put(function(req, res) {
+    return items
+    .updateOne(req.params.itemId, req.body)
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json(err))
+  })
   .patch(function(req, res) {
     return items
       .patchOne(req.params.itemId, req.body)

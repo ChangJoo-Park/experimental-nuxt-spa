@@ -8,11 +8,16 @@
 
     <item-filter :state="state" @update-state="updateState" />
 
-    <task-list :items="items" @toggle-done="toggleDone" />
+    <task-list
+      :items="items"
+      @toggle-done="toggleDone"
+      @update-item="onUpdateItem"
+    />
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import NewTaskInput from '~/components/Task/NewTaskInput.vue'
 import ItemFilter from '~/components/Task/Filter.vue'
 import TaskList from '~/components/Task/List.vue'
@@ -77,6 +82,12 @@ export default {
       } else {
         this.items.splice(index, 1)
       }
+    },
+    onUpdateItem(item) {
+      console.log('onUpdateItem => ', item._id)
+      const index = this.items.findIndex(i => i._id === item._id)
+      console.log('index => ', index)
+      Vue.set(this.items, index, item)
     }
   }
 }

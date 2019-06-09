@@ -43,7 +43,9 @@
           </svg>
         </div>
       </div>
-
+      <div>
+        {{ item.dueAt }}
+      </div>
       <button
         v-if="item.done"
         class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2 text-xs border border-gray-500 rounded outline-none"
@@ -64,7 +66,7 @@
         <div slot="header" class="flex-1 w-full p-4 justify-between">
           <label for="" class="block">Title</label>
           <input
-            v-model="item.title"
+            v-model="updatableItem.title"
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
           />
         </div>
@@ -78,6 +80,7 @@
                 cols="30"
                 rows="10"
                 class="w-full h-full p-2 outline-none focus:bg-gray-100 border rounded"
+                v-model="updatableItem.note"
               />
             </div>
             <div class="w-64">
@@ -86,6 +89,7 @@
                 <input
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
                   type="datetime-local"
+                  v-model="updatableItem.dueAt"
                 />
               </div>
               <div>
@@ -103,7 +107,7 @@
         <div slot="footer" class="p-4">
           <button
             class="px-4 p-2 border rounded bg-blue-400 text-white outline-none"
-            @click="modalOpen = false"
+            @click="tryUpdate"
           >
             Save
           </button>
@@ -135,7 +139,8 @@ export default {
   },
   data() {
     return {
-      modalOpen: false
+      modalOpen: false,
+      updatableItem: null
     }
   },
   computed: {
@@ -149,6 +154,13 @@ export default {
   watch: {
     'item.priority'(newPriority, oldPriority) {
       this.$emit('change-priority', { item: this.item, priority: newPriority })
+    },
+    modalOpen(isOpen) {
+      if (isOpen) {
+        this.updatableItem = Object.assign({}, this.item)
+      } else {
+        this.updatableItem = null
+      }
     }
   },
   methods: {
@@ -156,6 +168,11 @@ export default {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position)
       })
+    },
+    tryUpdate() {
+      console.log('tryUpdate => ', this.updatableItem._id)
+      this.$emit('update', this.updatableItem)
+      this.modalOpen = false
     }
   }
 }

@@ -1,4 +1,4 @@
-import { ObjectID } from 'mongodb'
+import { ObjectID, ObjectId } from 'mongodb'
 import { mongo } from '../database'
 
 const PRIORITY = {
@@ -23,13 +23,13 @@ const NEW_ITEM = {
 
 const findAll = (user, query) => {
   const { done = '', list = null } = query
-  const findOption = { userId: user._id }
+  const findOption = { userId: ObjectId(user._id) }
   if (done === 'true' || done === 'false') {
     findOption.done = done === 'true'
   }
 
   if (list !== null) {
-    findOption.listId = list
+    findOption.listId = ObjectId(list)
   } else {
     findOption.listId = null
   }
@@ -50,8 +50,8 @@ const findOneByUUID = uuid => {
 const create = (user, { title, list }) => {
   const newItem = NEW_ITEM
   newItem._id = new ObjectID()
-  newItem.userId = ObjectID(user._id)
-  newItem.listId = list
+  newItem.userId = ObjectId(user._id)
+  newItem.listId = list ? ObjectId(list) : null
   newItem.title = title
   return mongo(db => db.collection('items').insertOne(newItem))
     .then(({ ok, ops }) => ops[0])
@@ -60,8 +60,18 @@ const create = (user, { title, list }) => {
     })
 }
 
-const updateOne = payload => {
-  return mongo(db => db.collection('items').updateOne(payload))
+const updateOne = (uuid, payload) => {
+  const updatePayload = payload
+  updatePayload.userId = ObjectId(updatePayload.userId)
+  updatePayload.listId = updatePayload.listId ? ObjectId(updatePayload.listId) : updatePayload.listId
+  return mongo(db => db.collection('items')
+    .updateOne({ _id: ObjectId(uuid) }, {
+      $set: updatePayload
+    }))
+    .then(result => result)
+    .catch(error => {
+      console.error(error)
+    })
 }
 
 const patchOne = (uuid, payload) => {
@@ -75,7 +85,7 @@ const patchOne = (uuid, payload) => {
   }
   return mongo(db =>
     db.collection('items').findOneAndUpdate(
-      { _id: ObjectID(uuid) },
+      { _id: ObjectId(uuid) },
       {
         $set: updatePayload
       }
@@ -89,7 +99,7 @@ const destroy = () => {
 
 const destroyOne = uuid => {
   return mongo(db =>
-    db.collection('items').findOneAndDelete({ _id: ObjectID(uuid) })
+    db.collection('items').findOneAndDelete({ _id: ObjectId(uuid) })
   )
 }
 

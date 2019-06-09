@@ -5,6 +5,7 @@
         v-for="item in sortedItems"
         :key="item._id"
         :item="item"
+        @update="updateItem"
         @change-priority="changePriority"
         @done="toggleDone"
       />
@@ -38,6 +39,18 @@ export default {
     }
   },
   methods: {
+    updateItem(item) {
+      console.log('update items => ', item._id)
+      this.$repo.items
+        .updateOne(item._id, item)
+        .then(response => {
+          console.log('response => ', response)
+          this.$emit('update-item', item)
+        })
+        .catch(e => {
+          // console.error(e)
+        })
+    },
     changePriority({ item, priority }) {
       this.$repo.items
         .changePriority(item._id, priority)
