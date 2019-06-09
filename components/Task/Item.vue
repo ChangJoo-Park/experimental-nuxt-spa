@@ -80,34 +80,22 @@
                 class="w-full h-full p-2 outline-none focus:bg-gray-100 border rounded"
               />
             </div>
-            <div class="w-48">
+            <div class="w-64">
               <div>
-                <label for="" class="block">Started Date</label>
+                <label for="" class="block">Due At</label>
                 <input
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
-                  type="date"
+                  type="datetime-local"
                 />
               </div>
               <div>
-                <label for="" class="block">Started Time</label>
-                <input
-                  class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
-                  type="time"
-                />
-              </div>
-              <div>
-                <label for="" class="block">End Date</label>
-                <input
-                  class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
-                  type="date"
-                />
-              </div>
-              <div>
-                <label for="" class="block">End Time</label>
-                <input
-                  class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
-                  type="time"
-                />
+                <label for="" class="block">Current Position</label>
+                <button
+                  class="border px-4 py-2"
+                  @click.prevent="tryGetCurrentPosition"
+                >
+                  현재위치
+                </button>
               </div>
             </div>
           </form>
@@ -161,6 +149,13 @@ export default {
   watch: {
     'item.priority'(newPriority, oldPriority) {
       this.$emit('change-priority', { item: this.item, priority: newPriority })
+    }
+  },
+  methods: {
+    tryGetCurrentPosition() {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position)
+      })
     }
   }
 }
