@@ -61,24 +61,23 @@
     </div>
     <transition name="fade">
       <modal v-if="modalOpen">
-        <div
-          slot="header"
-          class="flex-1 flex flex-row w-full p-4 justify-between"
-        >
+        <div slot="header" class="flex-1 w-full p-4 justify-between">
+          <label for="" class="block">Title</label>
           <input
             v-model="item.title"
-            class="text-xl px-4 py-2 w-full outline-none hover:bg-blue-100 focus:bg-blue-200"
+            class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
           />
         </div>
         <div slot="body" class="w-full p-4">
           <form class="flex flex-row w-full">
             <div class="flex-1 mr-4">
+              <label for="" class="block">Notes</label>
               <textarea
                 id="item-note"
                 name="item-note"
                 cols="30"
                 rows="10"
-                class="w-full h-full p-2 outline-none hover:bg-blue-100 focus:bg-blue-200 border rounded"
+                class="w-full h-full p-2 outline-none focus:bg-gray-100 border rounded"
               />
             </div>
             <div class="w-48">
