@@ -23,7 +23,7 @@ export default {
         .signin(payload)
         .then(response => {
           this.setUser(response.data)
-          this.$router.push('/')
+          this.$router.push('/app')
         })
         .catch(error => {
           console.log(error)
