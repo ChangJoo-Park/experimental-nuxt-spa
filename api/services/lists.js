@@ -5,11 +5,13 @@ const NEW_LIST = {
   _id: null,
   userId: null,
   title: '',
-  members: []
+  members: [],
+  removed: false,
+  removedAt: null
 }
 
 const findAll = (user, query) => {
-  const findOption = { userId: user._id }
+  const findOption = { userId: user._id, removed: false }
 
   return mongo(db =>
     db
@@ -54,9 +56,11 @@ const destroy = () => {
 }
 
 const destroyOne = uuid => {
-  return mongo(db =>
-    db.collection('lists').findOneAndDelete({ _id: ObjectID(uuid) })
-  )
+  return mongo(db => db.collection('lists').findOneAndUpdate({
+    _id: ObjectId(uuid)
+  }, {
+    $set: { removed: true, removedAt: new Date() }
+  }))
 }
 
 export default {

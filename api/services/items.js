@@ -93,14 +93,20 @@ const patchOne = (uuid, payload) => {
   )
 }
 
-const destroy = () => {
-  return mongo(db => db.collection('items').remove({}))
+const destroy = (uuid) => {
+  return mongo(db => db.collection('items').findOneAndUpdate({
+    _id: ObjectId(uuid)
+  }, {
+    $set: { removed: true, removedAt: new Date() }
+  }))
 }
 
 const destroyOne = uuid => {
-  return mongo(db =>
-    db.collection('items').findOneAndDelete({ _id: ObjectId(uuid) })
-  )
+  return mongo(db => db.collection('items').findOneAndUpdate({
+    _id: ObjectId(uuid)
+  }, {
+    $set: { removed: true, removedAt: new Date() }
+  }))
 }
 
 export default {

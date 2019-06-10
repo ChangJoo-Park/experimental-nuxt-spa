@@ -20,7 +20,7 @@ export default $axios => {
     return $axios.patch(`/api/items/${uuid}`, option)
   }
 
-  const destroyOne = (uuid, option) => {
+  const destroyOne = uuid => {
     return $axios.delete(`/api/items/${uuid}`)
   }
 

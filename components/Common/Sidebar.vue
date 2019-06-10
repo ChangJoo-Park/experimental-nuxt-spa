@@ -35,6 +35,7 @@
           </button>
           <button
             class="hover:text-white hover:bg-red-600 hover:border-red-700 px-2 py-1 border rounded outline-none"
+            @click="tryRemoveList(list)"
           >
             삭제
           </button>
@@ -53,7 +54,6 @@
       <div class="mb-4">
         <label for="">New List Name</label>
         <input
-          :key="new Date()"
           v-model.trim="newList.title"
           v-focus
           type="text"
@@ -119,6 +119,16 @@ export default {
         })
         .then(response => {
           this.lists.push(response.data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    tryRemoveList(list) {
+      this.$repo.lists
+        .destroyOne(list._id)
+        .then(repsonse => {
+          console.log('removed')
         })
         .catch(error => {
           console.error(error)

@@ -17,5 +17,12 @@ router
       .create(res.locals.user, req.body)
       .then(result => res.status(201).json(result))
   })
+router
+  .route('/:listId')
+  .delete(function(req, res) {
+    return lists
+      .destroyOne(req.params.listId)
+      .then(result => res.status(200).json(result))
+  })
 
 export default router
