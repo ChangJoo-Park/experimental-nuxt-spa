@@ -11,10 +11,10 @@
       <div class="font-medium">
         {{ item.title }}
       </div>
-      <div class="text-gray-600 text-sm">
+      <div class="text-gray-500 text-sm">
         {{ item.note }}
       </div>
-      <div v-if="item.done" class="text-xs text-gray-500">
+      <div v-if="item.done" class="text-sm text-gray-500">
         {{ doneAt }}
       </div>
     </div>
