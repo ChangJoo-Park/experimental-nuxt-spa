@@ -2,11 +2,17 @@
   <li
     :key="item._id"
     :class="{ done: item.done }"
-    class="border rounded shadow mb-3 p-1 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
+    class="border rounded shadow mb-3 flex justify-between items-center shadow transition-shadow hover:shadow-md hover:bg-gray-100 select-none"
   >
-    <div class="px-4 flex-1">
-      <div class="font-medium cursor-pointer" @click="modalOpen = !modalOpen">
+    <div
+      class="px-4 py-2 flex-1 mr-4 cursor-pointer"
+      @click="modalOpen = !modalOpen"
+    >
+      <div class="font-medium">
         {{ item.title }}
+      </div>
+      <div class="text-gray-600 text-sm">
+        {{ item.note }}
       </div>
       <div v-if="item.done" class="text-xs text-gray-500">
         {{ doneAt }}
