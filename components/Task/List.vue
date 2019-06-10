@@ -1,6 +1,13 @@
 <template>
-  <div v-if="sortedItems && sortedItems.length">
-    <ul>
+  <div v-if="sortedItems && sortedItems.length" class="overflow-hidden">
+    <transition-group
+      name="list-item"
+      tag="ul"
+      appear
+      mode="in-out"
+      enter-active-class="animated fadeIn faster"
+      leave-active-class="animated fadeOut faster"
+    >
       <item
         v-for="item in sortedItems"
         :key="item._id"
@@ -9,7 +16,7 @@
         @change-priority="changePriority"
         @done="toggleDone"
       />
-    </ul>
+    </transition-group>
   </div>
   <div v-else class="flex items-center justify-center" style="height: 300px;">
     <div class="text-6xl font-mono text-gray-700">There is no items</div>
@@ -75,3 +82,9 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss">
+.list-item-leave-to {
+  position: absolute;
+}
+</style>
