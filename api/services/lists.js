@@ -1,4 +1,4 @@
-import { ObjectID } from 'mongodb'
+import { ObjectID, ObjectId } from 'mongodb'
 import { mongo } from '../database'
 
 const NEW_LIST = {
@@ -55,7 +55,13 @@ const destroy = () => {
   return mongo(db => db.collection('lists').remove({}))
 }
 
-const destroyOne = uuid => {
+const destroyOne = async uuid => {
+  await mongo(db => db.collection('items').update({
+    listId: ObjectId(uuid)
+  }, {
+    $set: { listId: null }
+  }))
+
   return mongo(db => db.collection('lists').findOneAndUpdate({
     _id: ObjectId(uuid)
   }, {

@@ -50,7 +50,12 @@
         Create a new list
       </button>
     </div>
-    <div v-else v-cloak key="newListForm" class="m-4 p-4 bg-white shadow">
+    <form
+      v-else
+      key="newListForm"
+      class="m-4 p-4 bg-white shadow"
+      @submit.prevent="tryCreateList"
+    >
       <div class="mb-4">
         <label for="">New List Name</label>
         <input
@@ -70,12 +75,12 @@
         </button>
         <button
           class="border border-gray-500 rounded px-4 py-2 text-sm text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
-          @click="openNewListForm = false"
+          @click.prevent="openNewListForm = false"
         >
           Cancel
         </button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -119,6 +124,10 @@ export default {
         })
         .then(response => {
           this.lists.push(response.data)
+          this.$router.push({
+            name: 'app-list',
+            params: { list: response.data._id }
+          })
         })
         .catch(error => {
           console.error(error)
@@ -128,7 +137,7 @@ export default {
       this.$repo.lists
         .destroyOne(list._id)
         .then(repsonse => {
-          console.log('removed')
+          this.$router.push('/app')
         })
         .catch(error => {
           console.error(error)
