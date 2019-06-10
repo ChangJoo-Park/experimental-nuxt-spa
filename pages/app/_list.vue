@@ -2,7 +2,7 @@
   <div class="p-4">
     <new-task-input
       ref="new"
-      class="select-none border-t-8 border-gray-700  rounded-t-lg p-4 shadow hover:shadow-xl transition-shadow"
+      class="select-none border-t-8 border-gray-700  rounded p-4 shadow"
       @on-submit="tryAddItem"
     />
 
@@ -28,30 +28,22 @@ export default {
     TaskList,
     ItemFilter
   },
+  computed: {
+    items() {
+      return this.list.items || []
+    }
+  },
   watch: {
     async state(newState) {
-      const query = {
-        list: this.$route.params.list
-      }
-      switch (newState) {
-        case 'active':
-          query.done = false
-          break
-        case 'completed':
-          query.done = true
-          break
-      }
-      const { data } = await this.$repo.items.find(query)
-      this.items = data
+      const { list } = this.$route.params
+      const { data } = await this.$repo.lists.findOne(list, newState)
+      this.list = data
     }
   },
   async asyncData({ app, params }) {
-    const { data } = await app.$repo.items.find({
-      done: false,
-      list: params.list
-    })
+    const { data } = await app.$repo.lists.findOne(params.list, 'active')
     return {
-      items: data,
+      list: data,
       state: 'active'
     }
   },

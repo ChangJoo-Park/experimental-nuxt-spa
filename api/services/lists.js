@@ -34,6 +34,37 @@ const create = (user, { title }) => {
     })
 }
 
+const findOne = (uuid, payload) => {
+  return mongo(db => {
+    const $match = {
+      listId: ObjectId(uuid),
+      done: false
+    }
+
+    if (payload.state === 'completed') {
+      $match.done = true
+    } else if (payload.state === 'all') {
+      delete $match.done
+    }
+    return db.collection('lists').aggregate()
+      .match({ _id: ObjectId(uuid) })
+      .lookup({
+        from: 'items',
+        pipeline: [
+          { $match }
+        ],
+        as: 'items'
+      })
+      .next()
+    })
+    .then(result => {
+      return result
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
 const updateOne = payload => {
   return mongo(db => db.collection('lists').updateOne(payload))
 }
@@ -71,6 +102,7 @@ const destroyOne = async uuid => {
 
 export default {
   findAll,
+  findOne,
   create,
   updateOne,
   patchOne,

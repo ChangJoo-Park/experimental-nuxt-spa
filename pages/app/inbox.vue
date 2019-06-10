@@ -2,7 +2,7 @@
   <div class="p-4">
     <new-task-input
       ref="new"
-      class="select-none border-t-8 border-gray-700  rounded-t-lg p-4 shadow hover:shadow-xl transition-shadow"
+      class="select-none border-t-8 border-gray-700  rounded p-4 shadow"
       @on-submit="tryAddItem"
     />
 

@@ -19,7 +19,12 @@ router
   })
 router
   .route('/:listId')
-  .delete(function(req, res) {
+  .get([auth.authenticated], function (req, res) {
+    return lists
+      .findOne(req.params.listId, req.query)
+      .then(result => res.status(200).json(result))
+  })
+  .delete([auth.authenticated], function(req, res) {
     return lists
       .destroyOne(req.params.listId)
       .then(result => res.status(200).json(result))
