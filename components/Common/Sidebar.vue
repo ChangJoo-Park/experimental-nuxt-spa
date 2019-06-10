@@ -41,7 +41,7 @@
         </div>
       </nuxt-link>
     </ul>
-    <div class="px-4 py-2">
+    <div v-if="!openNewListForm" class="px-4 py-2 text-center">
       <button
         class="border border-blue-500 rounded px-4 py-1 text-sm text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
         @click="openNewListForm = true"
@@ -49,29 +49,27 @@
         Create a new list
       </button>
     </div>
-    <div
-      v-if="openNewListForm"
-      key="newListForm"
-      class="m-4 p-4 bg-white shadow"
-    >
+    <div v-else v-cloak key="newListForm" class="m-4 p-4 bg-white shadow">
       <div class="mb-4">
         <label for="">New List Name</label>
         <input
+          :key="new Date()"
           v-model.trim="newList.title"
+          v-focus
           type="text"
           class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-          autofocus
+          :autofocus="'autofocus'"
         />
       </div>
-      <div>
+      <div class="text-center">
         <button
-          class="border border-white-500 rounded px-4 py-2 text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
+          class="border border-white-500 rounded px-4 py-2 text-sm text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
           @click="tryCreateList"
         >
           Submit
         </button>
         <button
-          class="border border-gray-500 rounded px-4 py-2 text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
+          class="border border-gray-500 rounded px-4 py-2 text-sm text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
           @click="openNewListForm = false"
         >
           Cancel
@@ -82,7 +80,14 @@
 </template>
 
 <script>
+const focus = {
+  inserted(el) {
+    el.focus()
+  }
+}
+
 export default {
+  directives: { focus },
   data() {
     return {
       lists: [],
