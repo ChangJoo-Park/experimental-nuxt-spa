@@ -76,20 +76,20 @@
               <label for="" class="block">Notes</label>
               <textarea
                 id="item-note"
+                v-model="updatableItem.note"
                 name="item-note"
                 cols="30"
                 rows="10"
                 class="w-full h-full p-2 outline-none focus:bg-gray-100 border rounded"
-                v-model="updatableItem.note"
               />
             </div>
             <div class="w-64">
               <div>
                 <label for="" class="block">Due At</label>
                 <input
+                  v-model="updatableItem.dueAt"
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
                   type="datetime-local"
-                  v-model="updatableItem.dueAt"
                 />
               </div>
               <div>
