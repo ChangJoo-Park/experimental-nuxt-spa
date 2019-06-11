@@ -64,12 +64,17 @@
         Done
       </button>
     </div>
-    <transition name="fade">
-      <modal v-if="modalOpen">
+    <transition
+      name="animate-modal"
+      enter-active-class="animated fadeIn faster"
+      leave-active-class="animated fadeOut faster"
+    >
+      <modal v-if="modalOpen" @close="tryCloseModal">
         <div slot="header" class="flex-1 w-full p-4 justify-between">
           <label for="" class="block">Title</label>
           <input
             v-model="updatableItem.title"
+            v-focus
             type="text"
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
           />
@@ -185,6 +190,9 @@ export default {
     tryUpdate() {
       console.log('tryUpdate => ', this.updatableItem._id)
       this.$emit('update', this.updatableItem)
+      this.modalOpen = false
+    },
+    tryCloseModal() {
       this.modalOpen = false
     }
   }

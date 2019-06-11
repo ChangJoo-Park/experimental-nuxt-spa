@@ -14,5 +14,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    console.log('mounted item')
+    window.document.addEventListener('keyup', this.emitClose)
+  },
+  beforeDestroy() {
+    console.log('beforeDestroy')
+    window.document.removeEventListener('keyup', this.emitClose)
+  },
+  methods: {
+    emitClose(e) {
+      if (e.key === 'Escape') {
+        this.$emit('close')
+      }
+    }
+  }
+}
 </script>
