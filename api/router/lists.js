@@ -22,7 +22,12 @@ router
   .get([auth.authenticated], function (req, res) {
     return lists
       .findOne(req.params.listId, req.query)
-      .then(result => res.status(200).json(result))
+      .then(result => {
+        if (!result) {
+          return res.status(404).json({})
+        }
+        return res.status(200).json(result)
+      })
   })
   .delete([auth.authenticated], function(req, res) {
     return lists
