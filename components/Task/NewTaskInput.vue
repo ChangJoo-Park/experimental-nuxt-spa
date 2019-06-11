@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4">
     <label for="new-form-input" class="font-bold text-grey-darker block mb-2">
-      New Task
+      {{ label }}
     </label>
     <input
       id="new-form-input"
@@ -17,6 +17,13 @@
 
 <script>
 export default {
+  props: {
+    label: {
+      type: String,
+      default: () => 'New Task',
+      required: false
+    }
+  },
   data() {
     return {
       title: ''
