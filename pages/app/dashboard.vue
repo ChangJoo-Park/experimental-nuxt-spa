@@ -3,3 +3,11 @@
     <h1 class="dashboard">DASHBOARD</h1>
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    return this.$router.replace({ name: 'app-inbox' })
+  }
+}
+</script>
