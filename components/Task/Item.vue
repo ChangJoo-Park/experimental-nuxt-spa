@@ -11,8 +11,8 @@
       <div class="font-medium">
         {{ item.title }}
       </div>
-      <div class="text-gray-500 text-sm">
-        {{ item.note }}
+      <div>
+        <span>{{ dueAt }}</span> <span>{{ item.note }}</span>
       </div>
       <div v-if="item.done" class="text-sm text-gray-500">
         {{ doneAt }}
@@ -49,9 +49,6 @@
           </svg>
         </div>
       </div>
-      <div>
-        {{ item.dueAt }}
-      </div>
       <button
         v-if="item.done"
         class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2 text-xs border border-gray-500 rounded outline-none"
@@ -73,6 +70,7 @@
           <label for="" class="block">Title</label>
           <input
             v-model="updatableItem.title"
+            type="text"
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
           />
         </div>
@@ -95,7 +93,7 @@
                 <input
                   v-model="updatableItem.dueAt"
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
-                  type="datetime-local"
+                  type="date"
                 />
               </div>
               <div>
@@ -152,6 +150,15 @@ export default {
   computed: {
     priorityClass() {
       return `priority-${this.item.priority}`
+    },
+    dueAt() {
+      if (!this.item.dueAt) {
+        return ''
+      }
+      if (this.$moment(this.item.dueAt).isSame(new Date(), 'd')) {
+        return '오늘'
+      }
+      return `${this.$moment(this.item.dueAt).fromNow()}`
     },
     doneAt() {
       return `${this.$moment(this.item.doneAt).fromNow()} 완료함`
