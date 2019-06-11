@@ -6,10 +6,11 @@
       @on-submit="tryAddItem"
     />
 
-    <item-filter :state="state" @update-state="updateState" />
+    <item-filter :state="state" @update-state="updateState" class="mb-4" />
 
     <task-list
       :items="items"
+      :state="state"
       @toggle-done="toggleDone"
       @update-item="onUpdateItem"
     />

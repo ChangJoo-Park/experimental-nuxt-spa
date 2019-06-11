@@ -11,6 +11,7 @@
 
     <task-list
       :items="items"
+      :state="state"
       @toggle-done="toggleDone"
       @update-item="onUpdateItem"
     />

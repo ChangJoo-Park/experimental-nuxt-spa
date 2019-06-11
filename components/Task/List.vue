@@ -11,8 +11,29 @@
       />
     </ul>
   </div>
-  <div v-else class="flex items-center justify-center" style="height: 300px;">
-    <div class="text-6xl font-mono text-gray-700">There is no items</div>
+  <div v-else class="flex items-center justify-center mt-4">
+    <div
+      class="text-4xl font-mono text-gray-700 text-center flex flex-col justify-center items-center w-full"
+    >
+      <img
+        v-if="state === 'active'"
+        class="h-64"
+        src="~/assets/images/partying_2(1).svg"
+      />
+      <img
+        v-else-if="state === 'completed'"
+        class="h-64"
+        src="~/assets/images/notes.svg"
+      />
+      <img
+        v-else
+        class="h-64"
+        src="~/assets/images/working_with_computer.svg"
+      />
+      <div>
+        There is no items
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +49,11 @@ export default {
       type: Array,
       default: () => [],
       required: true
+    },
+    state: {
+      state: String,
+      default: () => 'active',
+      required: true
     }
   },
   computed: {
@@ -36,6 +62,18 @@ export default {
         .slice()
         .sort((a, b) => a.priority - b.priority)
         .sort((a, b) => a.done - b.done)
+    },
+    emptyImage() {
+      switch (this.state) {
+        case 'active':
+          return '~/assets/images/partying_2(1).svg'
+        case 'all':
+          return '~/assets/images/partying_2.svg'
+        case 'completed':
+          return '~/assets/images/notes.svg'
+        default:
+          return '~/assets/images/partying_2(1).svg'
+      }
     }
   },
   methods: {
