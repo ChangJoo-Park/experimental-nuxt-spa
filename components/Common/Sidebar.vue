@@ -1,14 +1,13 @@
 <template>
   <div id="sidebar" class="flex-none w-full md:max-w-xs bg-blue-100">
     <ul class="list-none">
-      <nuxt-link
+      <!-- <nuxt-link
         class="text-lg select-none cursor-pointer p-4 hover:bg-blue-500 hover:text-white"
         tag="li"
         :to="{ name: 'app-dashboard' }"
       >
         Home
-      </nuxt-link>
-
+      </nuxt-link> -->
       <nuxt-link
         class="text-lg select-none cursor-pointer p-4 hover:bg-blue-500 hover:text-white"
         tag="li"
