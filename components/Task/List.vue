@@ -31,7 +31,7 @@
         src="~/assets/images/working_with_computer.svg"
       />
       <div>
-        There is no items
+        {{ emptyString }}
       </div>
     </div>
   </div>
@@ -63,17 +63,23 @@ export default {
         .sort((a, b) => a.priority - b.priority)
         .sort((a, b) => a.done - b.done)
     },
-    emptyImage() {
+    emptyString() {
+      let empty = ''
       switch (this.state) {
         case 'active':
-          return '~/assets/images/partying_2(1).svg'
+          empty = 'No Items'
+          break
         case 'all':
-          return '~/assets/images/partying_2.svg'
+          empty = 'All empty'
+          break
         case 'completed':
-          return '~/assets/images/notes.svg'
+          empty = 'Everything is done'
+          break
         default:
-          return '~/assets/images/partying_2(1).svg'
+          empty = 'There is no items'
+          break
       }
+      return empty
     }
   },
   methods: {
