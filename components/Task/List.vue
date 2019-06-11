@@ -13,7 +13,7 @@
   </div>
   <div v-else class="flex items-center justify-center mt-4">
     <div
-      class="text-4xl font-mono text-gray-700 text-center flex flex-col justify-center items-center w-full"
+      class="text-4xl font-mono text-gray-700 text-center flex flex-col justify-center items-center w-full select-none"
     >
       <img
         v-if="state === 'active'"
@@ -30,7 +30,7 @@
         class="h-64"
         src="~/assets/images/working_with_computer.svg"
       />
-      <div>
+      <div class="mt-4 select-none">
         {{ emptyString }}
       </div>
     </div>
