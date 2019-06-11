@@ -19,6 +19,15 @@ router
   })
 
 router
+  .route('/dashboard')
+  .get([auth.authenticated], function(req, res) {
+    return items
+      .getDashboard(res.locals.user, req.query)
+      .then(result => res.status(200).json(result))
+  })
+
+
+router
   .route('/:itemId')
   .get(function(req, res) {
     return items
