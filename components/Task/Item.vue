@@ -22,7 +22,7 @@
       <div class="inline-block relative w-32 mr-4 text-xs">
         <select
           v-model="item.priority"
-          class="text-xs text-center uppercase block appearance-none w-full bg-white px-2 py-1 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+          class="text-xs text-center block appearance-none w-full bg-white px-2 py-1 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
           :class="priorityClass"
         >
           <option value="0">
@@ -73,7 +73,8 @@
         <div slot="header" class="flex-1 w-full p-4 justify-between">
           <label for="" class="block">Title</label>
           <input
-            v-model="updatableItem.title"
+            v-model.trim="updatableItem.title"
+            @keyup.enter="tryUpdate"
             v-focus
             type="text"
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
@@ -98,7 +99,7 @@
                 <div class="relative w-full border">
                   <select
                     v-model="updatableItem.listId"
-                    class="text-xs text-center uppercase block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                    class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                   >
                     <option value="inbox">Inbox</option>
                     <option
@@ -129,7 +130,7 @@
                 <div class="relative w-full border">
                   <select
                     v-model="updatableItem.priority"
-                    class="text-xs text-center uppercase block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                    class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                     :class="priorityClass"
                   >
                     <option value="0">
@@ -256,6 +257,11 @@ export default {
       })
     },
     tryUpdate() {
+      // FIXME: 연타하는 경우 에러남
+      if (this.updatableItem.title === '') {
+        return
+      }
+
       if (this.updatableItem.listId === 'inbox') {
         this.updatableItem.listId = null
       }
