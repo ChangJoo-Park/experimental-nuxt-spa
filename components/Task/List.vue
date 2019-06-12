@@ -46,7 +46,7 @@ export default {
   },
   props: {
     list: {
-      props: Object,
+      type: Object,
       default: () => {},
       required: true
     },
@@ -56,7 +56,7 @@ export default {
       required: true
     },
     state: {
-      state: String,
+      type: String,
       default: () => 'active',
       required: true
     }
