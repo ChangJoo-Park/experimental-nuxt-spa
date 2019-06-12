@@ -58,11 +58,37 @@
       </button>
       <button
         v-else
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 text-xs border border-blue-700 rounded outline-none"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 text-xs border border-blue-700 rounded outline-none mr-4"
         @click.prevent="$emit('done', item)"
       >
         마치기
       </button>
+      <div class="relative text-xl p-2 outline-none">
+        <button @click="actionOpen = !actionOpen">:</button>
+        <div
+          v-if="actionOpen"
+          class="absolute right-0 top-0 w-40 border rounded z-20 bg-white shadow-lg"
+        >
+          <ul class="text-base">
+            <li
+              class="px-2 py-1 cursor-pointer hover:bg-black hover:text-white"
+            >
+              수정하기
+            </li>
+            <li
+              class="px-2 py-1 cursor-pointer hover:bg-black hover:text-white"
+            >
+              삭제하기
+            </li>
+            <li
+              class="px-2 py-1 cursor-pointer hover:bg-black hover:text-white"
+              @click="actionOpen = false"
+            >
+              닫기
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <transition
       name="animate-modal"
@@ -213,6 +239,7 @@ export default {
   data() {
     return {
       modalOpen: false,
+      actionOpen: false,
       updatableItem: null,
       list: []
     }

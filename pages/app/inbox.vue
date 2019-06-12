@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="p-4 h-full flex flex-col">
     <new-task-input
       ref="new"
       class="select-none border-t-8 border-gray-700  rounded p-4 shadow"
@@ -9,6 +9,7 @@
     <item-filter :state="state" @update-state="updateState" />
 
     <task-list
+      class="flex-1"
       :list="{ _id: null }"
       :items="items"
       :state="state"

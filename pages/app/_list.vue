@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="p-4 h-full flex flex-col">
     <new-task-input
       ref="new"
       :label="`${list.title}의 새 할일`"
@@ -10,6 +10,7 @@
     <item-filter :state="state" @update-state="updateState" />
 
     <task-list
+      class="flex-1"
       :list="list"
       :items="items"
       :state="state"
