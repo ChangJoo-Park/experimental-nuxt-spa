@@ -54,13 +54,13 @@
               class="border border-blue-500 rounded px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-700"
               @click="tryCreateList"
             >
-              Submit
+              만들기
             </button>
             <button
               class="border border-gray-500 rounded px-4 py-2 text-sm text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
               @click.prevent="openNewListForm = false"
             >
-              Cancel
+              닫기
             </button>
           </div>
         </form>
