@@ -100,6 +100,7 @@
                     v-model="updatableItem.listId"
                     class="text-xs text-center uppercase block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                   >
+                    <option value="inbox">Inbox</option>
                     <option
                       v-for="listItem in list"
                       :key="listItem._id"
@@ -255,7 +256,10 @@ export default {
       })
     },
     tryUpdate() {
-      console.log('tryUpdate => ', this.updatableItem._id)
+      if (this.updatableItem.listId === 'inbox') {
+        this.updatableItem.listId = null
+      }
+
       this.$emit('update', this.updatableItem)
       this.modalOpen = false
     },

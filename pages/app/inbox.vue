@@ -9,6 +9,7 @@
     <item-filter :state="state" @update-state="updateState" />
 
     <task-list
+      :list="{ _id: null }"
       :items="items"
       :state="state"
       @toggle-done="toggleDone"
