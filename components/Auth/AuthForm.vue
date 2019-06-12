@@ -11,6 +11,7 @@
         class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
         required
         autofocus
+        v-focus
         autocomplete="email"
       />
     </div>
