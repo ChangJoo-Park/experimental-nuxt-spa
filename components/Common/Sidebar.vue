@@ -13,9 +13,58 @@
         tag="li"
         :to="{ name: 'app-inbox' }"
       >
-        Inbox
+        인박스
       </nuxt-link>
-      <hr class="border-white border-separate border-b" />
+      <div class="p-2 bg-white">
+        <div class="flex justify-center items-center">
+          <div class="text-center flex-1">
+            목록
+          </div>
+          <div
+            v-if="!openNewListForm"
+            class="px-4 py-2 text-center"
+            style="min-width: 40px;"
+          >
+            <button
+              class="border border-blue-500 rounded px-4 py-1 text-sm text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
+              @click="openNewListForm = true"
+            >
+              New
+            </button>
+          </div>
+        </div>
+        <form
+          v-if="openNewListForm"
+          key="newListForm"
+          class="m-4 p-4 bg-gray-100 rounded shadow"
+          @submit.prevent="tryCreateList"
+        >
+          <div class="mb-4">
+            <label for="">새 목록 이름</label>
+            <input
+              v-model.trim="newList.title"
+              v-focus
+              type="text"
+              class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              :autofocus="'autofocus'"
+            />
+          </div>
+          <div class="text-center">
+            <button
+              class="border border-blue-500 rounded px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-700"
+              @click="tryCreateList"
+            >
+              Submit
+            </button>
+            <button
+              class="border border-gray-500 rounded px-4 py-2 text-sm text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
+              @click.prevent="openNewListForm = false"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
       <nuxt-link
         v-for="list in lists"
         :key="list._id"
@@ -41,45 +90,6 @@
         </div>
       </nuxt-link>
     </ul>
-    <div v-if="!openNewListForm" class="px-4 py-2 text-center">
-      <button
-        class="border border-blue-500 rounded px-4 py-1 text-sm text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
-        @click="openNewListForm = true"
-      >
-        Create a new list
-      </button>
-    </div>
-    <form
-      v-else
-      key="newListForm"
-      class="m-4 p-4 bg-white shadow"
-      @submit.prevent="tryCreateList"
-    >
-      <div class="mb-4">
-        <label for="">New List Name</label>
-        <input
-          v-model.trim="newList.title"
-          v-focus
-          type="text"
-          class="bg-white focus:outline-0 focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-          :autofocus="'autofocus'"
-        />
-      </div>
-      <div class="text-center">
-        <button
-          class="border border-white-500 rounded px-4 py-2 text-sm text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
-          @click="tryCreateList"
-        >
-          Submit
-        </button>
-        <button
-          class="border border-gray-500 rounded px-4 py-2 text-sm text-gray-500 bg-white hover:bg-gray-500 hover:text-white"
-          @click.prevent="openNewListForm = false"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
   </div>
 </template>
 
