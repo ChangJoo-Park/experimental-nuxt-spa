@@ -35,7 +35,8 @@ module.exports = {
     '~/plugins/axios.js',
     '~/plugins/directives.client.js',
     '~/plugins/nuxt-client-init.client.js',
-    '~/plugins/repository.js'
+    '~/plugins/repository.js',
+    '~/plugins/i18n.js'
   ],
 
   /*

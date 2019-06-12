@@ -1,9 +1,11 @@
 <template>
   <div class="container mx-auto max-w-md">
-    <h1 class="font-bold uppercase my-4 text-center text-6xl">Login</h1>
+    <h1 class="font-bold uppercase my-4 text-center text-6xl">
+      {{ $t('auth.doLogin') }}
+    </h1>
     <auth-form @on-submit="trySignIn" />
-    <nuxt-link class="hover:underline text-blue-500" :to="{ name: 'signup' }">
-      Do you need account?
+    <nuxt-link class="hover:underline text-blue-500" to="/signup">
+      {{ $t('auth.needSignUp') }}
     </nuxt-link>
   </div>
 </template>

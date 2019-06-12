@@ -3,7 +3,7 @@
     class="flex items-center justify-between flex-wrap bg-blue-500 p-6 shadow"
   >
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <nuxt-link to="/" class="font-semibold text-xl tracking-tight inline">
+      <nuxt-link to="/app" class="font-semibold text-xl tracking-tight inline">
         <svg
           class="fill-current inline h-8 w-8 mr-2"
           width="54"
@@ -42,22 +42,22 @@
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0"
             @click="tryLogout"
           >
-            Signout
+            {{ $t('auth.signout') }}
           </button>
         </template>
         <template v-else>
-          <button
+          <nuxt-link
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0"
-            @click="$router.push({ name: 'login' })"
+            to="/login"
           >
-            Login
-          </button>
-          <button
+            {{ $t('auth.signin') }}
+          </nuxt-link>
+          <nuxt-link
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0"
-            @click="$router.push({ name: 'signup' })"
+            to="/signup"
           >
-            SignUp
-          </button>
+            {{ $t('auth.signup') }}
+          </nuxt-link>
         </template>
       </div>
     </div>

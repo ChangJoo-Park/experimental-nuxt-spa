@@ -4,7 +4,7 @@
     @submit.prevent="$emit('on-submit', Object.assign({}, data))"
   >
     <div class="mb-4">
-      <label for="">Email</label>
+      <label for="">{{ $t('common.email') }}</label>
       <input
         v-model="data.email"
         v-focus
@@ -15,7 +15,7 @@
       />
     </div>
     <div class="mb-4">
-      <label for="">Password</label>
+      <label for="">{{ $t('common.password') }}</label>
       <input
         v-model="data.password"
         type="password"
@@ -27,7 +27,6 @@
     <input
       type="submit"
       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-      value="Submit"
     />
   </form>
 </template>

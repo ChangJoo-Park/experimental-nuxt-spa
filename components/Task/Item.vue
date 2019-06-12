@@ -100,10 +100,10 @@
           <label for="" class="block">제목</label>
           <input
             v-model.trim="updatableItem.title"
-            @keyup.enter="tryUpdate"
             v-focus
             type="text"
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
+            @keyup.enter="tryUpdate"
           />
         </div>
         <div slot="body" class="w-full p-4 mb-4">
