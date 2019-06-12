@@ -93,7 +93,70 @@
               />
             </div>
             <div class="w-64">
-              <div>
+              <div class="mb-4">
+                <label for="" class="block">List</label>
+                <div class="relative w-full border">
+                  <select
+                    v-model="updatableItem.listId"
+                    class="text-xs text-center uppercase block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                  >
+                    <option
+                      v-for="listItem in list"
+                      :key="listItem._id"
+                      :value="listItem._id"
+                    >
+                      {{ listItem.title }}
+                    </option>
+                  </select>
+                  <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                  >
+                    <svg
+                      class="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="">Priority</label>
+                <div class="relative w-full border">
+                  <select
+                    v-model="updatableItem.priority"
+                    class="text-xs text-center uppercase block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                    :class="priorityClass"
+                  >
+                    <option value="0">
+                      High
+                    </option>
+                    <option value="10">
+                      Medium
+                    </option>
+                    <option value="20">
+                      Low
+                    </option>
+                  </select>
+                  <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                  >
+                    <svg
+                      class="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
                 <label for="" class="block">Due At</label>
                 <input
                   v-model="updatableItem.dueAt"
@@ -101,7 +164,7 @@
                   type="date"
                 />
               </div>
-              <div>
+              <!-- <div>
                 <label for="" class="block">Current Position</label>
                 <button
                   class="border px-4 py-2"
@@ -109,7 +172,7 @@
                 >
                   현재위치
                 </button>
-              </div>
+              </div> -->
             </div>
           </form>
         </div>
@@ -149,7 +212,8 @@ export default {
   data() {
     return {
       modalOpen: false,
-      updatableItem: null
+      updatableItem: null,
+      list: []
     }
   },
   computed: {
@@ -173,11 +237,14 @@ export default {
     'item.priority'(newPriority, oldPriority) {
       this.$emit('change-priority', { item: this.item, priority: newPriority })
     },
-    modalOpen(isOpen) {
+    async modalOpen(isOpen) {
       if (isOpen) {
         this.updatableItem = Object.assign({}, this.item)
+        const { data } = await this.$repo.lists.all()
+        this.list = data
       } else {
         this.updatableItem = null
+        this.list = []
       }
     }
   },

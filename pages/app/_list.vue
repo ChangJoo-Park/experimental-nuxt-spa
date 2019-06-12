@@ -10,6 +10,7 @@
     <item-filter :state="state" @update-state="updateState" />
 
     <task-list
+      :list="list"
       :items="items"
       :state="state"
       @toggle-done="toggleDone"

@@ -45,6 +45,11 @@ export default {
     Item
   },
   props: {
+    list: {
+      props: Object,
+      default: () => {},
+      required: true
+    },
     items: {
       type: Array,
       default: () => [],
@@ -59,6 +64,7 @@ export default {
   computed: {
     sortedItems() {
       return this.items
+        .filter(i => i.listId === this.list._id)
         .slice()
         .sort((a, b) => a.priority - b.priority)
         .sort((a, b) => a.done - b.done)
