@@ -2,7 +2,7 @@
   <div class="p-4">
     <new-task-input
       ref="new"
-      :label="`New ${list.title} Task`"
+      :label="`${list.title}의 새 할일`"
       class="select-none border-t-8 border-gray-700  rounded p-4 shadow"
       @on-submit="tryAddItem"
     />

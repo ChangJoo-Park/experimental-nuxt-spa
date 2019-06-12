@@ -20,7 +20,7 @@ export default {
   props: {
     label: {
       type: String,
-      default: () => 'New Task',
+      default: () => '새 할일',
       required: false
     }
   },

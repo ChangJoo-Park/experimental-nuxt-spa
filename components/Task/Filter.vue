@@ -26,15 +26,15 @@ export default {
       navs: [
         {
           state: 'active',
-          label: 'Active'
+          label: '할일'
         },
         {
           state: 'completed',
-          label: 'Completed'
+          label: '완료함'
         },
         {
           state: 'all',
-          label: 'All'
+          label: '모두'
         }
       ]
     }

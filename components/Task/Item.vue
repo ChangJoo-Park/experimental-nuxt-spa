@@ -26,13 +26,13 @@
           :class="priorityClass"
         >
           <option value="0">
-            High
+            높음
           </option>
           <option value="10">
-            Medium
+            중간
           </option>
           <option value="20">
-            Low
+            낮음
           </option>
         </select>
         <div
@@ -54,14 +54,14 @@
         class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2 text-xs border border-gray-500 rounded outline-none"
         @click.prevent="$emit('done', item)"
       >
-        Todo
+        할일로
       </button>
       <button
         v-else
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 text-xs border border-blue-700 rounded outline-none"
         @click.prevent="$emit('done', item)"
       >
-        Done
+        마치기
       </button>
     </div>
     <transition
@@ -71,7 +71,7 @@
     >
       <modal v-if="modalOpen" @close="tryCloseModal">
         <div slot="header" class="flex-1 w-full p-4 justify-between">
-          <label for="" class="block">Title</label>
+          <label for="" class="block">제목</label>
           <input
             v-model.trim="updatableItem.title"
             @keyup.enter="tryUpdate"
@@ -80,10 +80,10 @@
             class="text-xl px-4 py-2 w-full rounded outline-none focus:bg-gray-100 border"
           />
         </div>
-        <div slot="body" class="w-full p-4">
+        <div slot="body" class="w-full p-4 mb-4">
           <form class="flex flex-row w-full">
             <div class="flex-1 mr-4">
-              <label for="" class="block">Notes</label>
+              <label for="" class="block">노트</label>
               <textarea
                 id="item-note"
                 v-model="updatableItem.note"
@@ -95,13 +95,13 @@
             </div>
             <div class="w-64">
               <div class="mb-4">
-                <label for="" class="block">List</label>
+                <label for="" class="block">목록</label>
                 <div class="relative w-full border">
                   <select
                     v-model="updatableItem.listId"
                     class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                   >
-                    <option value="inbox">Inbox</option>
+                    <option value="inbox">인박스</option>
                     <option
                       v-for="listItem in list"
                       :key="listItem._id"
@@ -126,21 +126,20 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label for="">Priority</label>
+                <label for="">우선순위</label>
                 <div class="relative w-full border">
                   <select
                     v-model="updatableItem.priority"
                     class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
-                    :class="priorityClass"
                   >
                     <option value="0">
-                      High
+                      높음
                     </option>
                     <option value="10">
-                      Medium
+                      중간
                     </option>
                     <option value="20">
-                      Low
+                      낮음
                     </option>
                   </select>
                   <div
@@ -159,7 +158,7 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label for="" class="block">Due At</label>
+                <label for="" class="block">예정일</label>
                 <input
                   v-model="updatableItem.dueAt"
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
@@ -178,19 +177,19 @@
             </div>
           </form>
         </div>
-        <div slot="footer" class="p-4">
+        <div slot="footer" class="w-full p-4 text-center">
           <button
-            class="px-4 p-2 border rounded bg-blue-400 text-white outline-none"
+            class="px-4 p-2 w-32 border rounded bg-blue-400 text-white outline-none"
             @click="tryUpdate"
           >
-            Save
+            저장하기
           </button>
 
           <button
-            class="px-4 p-2 border rounded outline-none"
+            class="px-4 p-2 w-32 border rounded outline-none"
             @click="modalOpen = false"
           >
-            Close
+            닫기
           </button>
         </div>
       </modal>
