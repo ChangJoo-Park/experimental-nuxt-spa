@@ -67,6 +67,7 @@
         <button @click="actionOpen = !actionOpen">:</button>
         <div
           v-if="actionOpen"
+          v-on-clickaway="closeDropdown"
           class="absolute right-0 top-0 w-40 border rounded z-20 bg-white shadow-lg"
         >
           <ul class="text-base">
@@ -225,8 +226,12 @@
 
 <script>
 import Modal from '~/components/Common/Modal.vue'
+import { directive as onClickaway } from 'vue-clickaway'
 
 export default {
+  directives: {
+    onClickaway
+  },
   components: {
     Modal
   },
@@ -268,6 +273,9 @@ export default {
     async modalOpen(isOpen) {
       if (isOpen) {
         this.updatableItem = Object.assign({}, this.item)
+        if (!this.updatableItem.listId) {
+          this.updatableItem.listId = 'inbox'
+        }
         const { data } = await this.$repo.lists.all()
         this.list = data
       } else {
@@ -297,6 +305,9 @@ export default {
     },
     tryCloseModal() {
       this.modalOpen = false
+    },
+    closeDropdown() {
+      this.actionOpen = false
     }
   }
 }

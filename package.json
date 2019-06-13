@@ -31,6 +31,7 @@
     "mongodb": "^3.2.6",
     "nuxt": "^2.4.0",
     "qs": "^6.7.0",
+    "vue-clickaway": "^2.2.2",
     "vue-i18n": "^8.11.2"
   },
   "devDependencies": {
