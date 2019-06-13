@@ -16,7 +16,6 @@
 <script>
 export default {
   mounted() {
-    console.log('mounted item')
     window.document.addEventListener('keyup', this.emitClose)
   },
   beforeDestroy() {
