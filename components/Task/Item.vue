@@ -19,10 +19,10 @@
       </div>
     </div>
     <div class="px-4 flex items-center justify-center relative">
-      <div class="inline-block relative w-32 mr-4 text-xs">
+      <div class="inline-block relative w-32 mr-4 ">
         <select
           v-model="item.priority"
-          class="text-xs text-center block appearance-none w-full bg-white px-2 py-1 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+          class=" text-center block appearance-none w-full bg-white px-2 py-1 pr-4 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
           :class="priorityClass"
         >
           <option value="0">
@@ -51,14 +51,14 @@
       </div>
       <button
         v-if="item.done"
-        class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2 text-xs border border-gray-500 rounded outline-none"
+        class="bg-white hover:bg-gray-700 hover:border-gray-700 text-gray-700 hover:text-white font-bold py-1 px-2  border border-gray-500 rounded outline-none"
         @click.prevent="$emit('done', item)"
       >
         할일로
       </button>
       <button
         v-else
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 text-xs border border-blue-700 rounded outline-none mr-4"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2  border border-blue-700 rounded outline-none mr-4"
         @click.prevent="$emit('done', item)"
       >
         마치기
@@ -98,8 +98,9 @@
     >
       <modal v-if="modalOpen" @close="tryCloseModal">
         <div slot="header" class="flex-1 w-full p-4 justify-between">
-          <label for="" class="block">제목</label>
+          <label for="item-title" class="block">제목</label>
           <input
+            id="item-title"
             v-model.trim="updatableItem.title"
             v-focus
             type="text"
@@ -110,7 +111,7 @@
         <div slot="body" class="w-full p-4 mb-4">
           <form class="flex flex-row w-full">
             <div class="flex-1 mr-4">
-              <label for="" class="block">노트</label>
+              <label for="item-note" class="block">노트</label>
               <textarea
                 id="item-note"
                 v-model="updatableItem.note"
@@ -122,11 +123,12 @@
             </div>
             <div class="w-64">
               <div class="mb-4">
-                <label for="" class="block">목록</label>
+                <label for="item-list" class="block">목록</label>
                 <div class="relative w-full border">
                   <select
+                    id="item-list"
                     v-model="updatableItem.listId"
-                    class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                    class=" text-center block appearance-none w-full bg-white px-4 py-2 outline-none rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                   >
                     <option value="inbox">인박스</option>
                     <option
@@ -153,11 +155,12 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label for="">우선순위</label>
+                <label for="item-priority">우선순위</label>
                 <div class="relative w-full border">
                   <select
+                    id="item-priority"
                     v-model="updatableItem.priority"
-                    class="text-xs text-center block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
+                    class=" text-center block appearance-none w-full bg-white px-4 py-2 rounded leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
                   >
                     <option value="0">
                       높음
@@ -185,8 +188,9 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label for="" class="block">예정일</label>
+                <label for="item-due-at" class="block">예정일</label>
                 <input
+                  id="item-due-at"
                   v-model="updatableItem.dueAt"
                   class="border w-full px-4 py-2 rounded mb-2 outline-none hover:bg-blue-100"
                   type="date"
