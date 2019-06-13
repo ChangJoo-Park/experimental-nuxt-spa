@@ -11,6 +11,7 @@ router
     return lists
       .findAll(res.locals.user)
       .then(result => res.status(200).json(result))
+      .catch(error => res.status(500).json(error))
   })
   .post([auth.authenticated], function(req, res) {
     return lists

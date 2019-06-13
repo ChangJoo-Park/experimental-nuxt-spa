@@ -12,14 +12,22 @@ const NEW_LIST = {
 
 const findAll = (user, query) => {
   const findOption = { userId: user._id, removed: false }
+  // const $match = {
+  //   listId: ObjectId(uuid),
+  //   done: false
+  // }
+  // .match(findOption)
 
-  return mongo(db =>
-    db
-      .collection('lists')
-      .find(findOption)
-      .sort({ _id: -1 })
-      .toArray()
-  )
+  return mongo(db => db.collection('lists')
+    .aggregate()
+    .lookup({
+      from: 'items',
+      localField: '_id',
+      foreignField: 'listId',
+      as: 'items'
+    })
+    .toArray()
+    .catch(error => console.log(error)))
 }
 
 const create = (user, { title }) => {

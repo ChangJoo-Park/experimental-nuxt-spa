@@ -72,10 +72,10 @@
         tag="li"
         :to="{ name: 'app-list', params: { list: list._id } }"
       >
-        <div class="flex-1">
-          {{ list.title }}
+        <div class="flex-1 flex justify-between">
+          <div>{{ list.title }}</div>
         </div>
-        <div class="list-action text-xs opacity-0">
+        <div class="list-action text-xs opacity-0 appearance-none hover:block">
           <button
             class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
           >
@@ -144,6 +144,13 @@ export default {
         .catch(error => {
           console.error(error)
         })
+    }
+  },
+  filters: {
+    doneItem(items) {
+      const activeItems = items.filter(item => !item.done)
+
+      return activeItems.length > 0 ? activeItems.length : ''
     }
   }
 }
