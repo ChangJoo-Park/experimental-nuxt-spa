@@ -20,6 +20,7 @@ const findAll = (user, query) => {
 
   return mongo(db => db.collection('lists')
     .aggregate()
+    .match(findOption)
     .lookup({
       from: 'items',
       localField: '_id',

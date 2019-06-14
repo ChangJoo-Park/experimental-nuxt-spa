@@ -73,11 +73,26 @@
         :to="{ name: 'app-list', params: { list: list._id } }"
       >
         <div class="flex-1 flex justify-between">
-          <div>{{ list.title }}</div>
+          <div v-if="openUpdateTitle" class="text-black">
+            <input type="text" class="px-4 py-2" v-model="list.title" v-focus />
+          </div>
+          <div v-else>{{ list.title }}</div>
         </div>
-        <div class="list-action text-xs opacity-0 appearance-none hover:block">
+        <div v-if="openUpdateTitle">
           <button
             class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
+            @click.prevent="tryUpdateList(list)"
+          >
+            저장
+          </button>
+        </div>
+        <div
+          v-else
+          class="list-action text-xs opacity-0 appearance-none hover:block"
+        >
+          <button
+            class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
+            @click.prevent="openUpdateTitle = true"
           >
             수정
           </button>
@@ -99,6 +114,7 @@ export default {
     return {
       lists: [],
       openNewListForm: false,
+      openUpdateTitle: false,
       newList: {
         title: ''
       }
@@ -146,12 +162,25 @@ export default {
         .catch(error => {
           console.error(error)
         })
+    },
+    tryUpdateList(list) {
+      if (list.title === '') {
+        return
+      }
+      this.$repo.lists
+        .patchOne(list._id, { title: list.title })
+        .then(repsonse => {
+          this.openUpdateTitle = false
+        })
+        .catch(error => {
+          console.error(error)
+        })
+      this.openUpdateTitle = false
     }
   },
   filters: {
     doneItem(items) {
       const activeItems = items.filter(item => !item.done)
-
       return activeItems.length > 0 ? activeItems.length : ''
     }
   }

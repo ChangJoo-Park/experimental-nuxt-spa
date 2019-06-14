@@ -30,6 +30,11 @@ router
         return res.status(200).json(result)
       })
   })
+  .patch([auth.authenticated], function(req, res) {
+    return lists
+      .patchOne(req.params.listId, req.body)
+      .then(result => res.status(200).json(result))
+  })
   .delete([auth.authenticated], function(req, res) {
     return lists
       .destroyOne(req.params.listId)
