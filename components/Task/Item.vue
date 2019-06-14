@@ -290,8 +290,8 @@ export default {
   },
   methods: {
     tryGetCurrentPosition() {
-      navigator.geolocation.getCurrentPosition(position => {
-      })
+      // navigator.geolocation.getCurrentPosition(position => {
+      // })
     },
     tryUpdate() {
       // FIXME: 연타하는 경우 에러남
