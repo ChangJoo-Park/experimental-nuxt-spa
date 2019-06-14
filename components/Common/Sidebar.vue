@@ -74,7 +74,7 @@
       >
         <div class="flex-1 flex justify-between">
           <div v-if="openUpdateTitle" class="text-black">
-            <input type="text" class="px-4 py-2" v-model="list.title" v-focus />
+            <input v-model="list.title" v-focus type="text" class="px-4 py-2" />
           </div>
           <div v-else>{{ list.title }}</div>
         </div>
@@ -110,6 +110,12 @@
 
 <script>
 export default {
+  filters: {
+    doneItem(items) {
+      const activeItems = items.filter(item => !item.done)
+      return activeItems.length > 0 ? activeItems.length : ''
+    }
+  },
   data() {
     return {
       lists: [],
@@ -176,12 +182,6 @@ export default {
           console.error(error)
         })
       this.openUpdateTitle = false
-    }
-  },
-  filters: {
-    doneItem(items) {
-      const activeItems = items.filter(item => !item.done)
-      return activeItems.length > 0 ? activeItems.length : ''
     }
   }
 }

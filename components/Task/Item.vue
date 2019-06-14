@@ -244,6 +244,11 @@ export default {
   components: {
     Modal
   },
+  filters: {
+    trimNote(value = '') {
+      return value.slice(0, 100)
+    }
+  },
   props: {
     item: {
       type: Object,
@@ -316,11 +321,6 @@ export default {
     },
     closeDropdown() {
       this.actionOpen = false
-    }
-  },
-  filters: {
-    trimNote(value = '') {
-      return value.slice(0, 100)
     }
   }
 }
