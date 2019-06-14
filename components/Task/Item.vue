@@ -11,8 +11,13 @@
       <div class="font-medium">
         {{ item.title }}
       </div>
-      <div>
-        <span>{{ dueAt }}</span> <span>{{ item.note }}</span>
+      <div class="text-sm">
+        <span class="text-indigo-900">
+          {{ dueAt }}
+        </span>
+        <span class="text-gray-600">
+          {{ item.note | trimNote }}
+        </span>
       </div>
       <div v-if="item.done" class="text-sm text-gray-500">
         {{ doneAt }}
@@ -264,7 +269,7 @@ export default {
       if (this.$moment(this.item.dueAt).isSame(new Date(), 'd')) {
         return '오늘'
       }
-      return `${this.$moment(this.item.dueAt).fromNow()}`
+      return `${this.$moment(this.item.dueAt).format('LL')}`
     },
     doneAt() {
       return `${this.$moment(this.item.doneAt).fromNow()} 완료함`
@@ -311,6 +316,11 @@ export default {
     },
     closeDropdown() {
       this.actionOpen = false
+    }
+  },
+  filters: {
+    trimNote(value = '') {
+      return value.slice(0, 100)
     }
   }
 }
