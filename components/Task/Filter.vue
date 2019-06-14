@@ -52,9 +52,9 @@ export default {
 
 <style lang="postcss">
 #filter-nav .active {
-  @apply font-bold border-b-4;
+  @apply font-bold border-gray-500 !important;
 }
 #filter-nav .filter-nav-link {
-  @apply m-3 py-2 px-2 cursor-pointer outline-none;
+  @apply m-3 py-2 px-2 cursor-pointer outline-none border-b-4 border-white;
 }
 </style>
