@@ -15,9 +15,9 @@
       >
         인박스
       </nuxt-link>
-      <div class="p-2 bg-white">
+      <div class="pl-2 bg-white">
         <div class="flex justify-center items-center">
-          <div class="text-center flex-1">
+          <div class="flex-1">
             목록
           </div>
           <div
@@ -78,24 +78,7 @@
           </div>
           <div v-else>{{ list.title }}</div>
         </div>
-        <div v-if="openUpdateTitle">
-          <button
-            class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
-            @click.prevent="tryUpdateList(list)"
-          >
-            저장
-          </button>
-        </div>
-        <div
-          v-else
-          class="list-action text-xs opacity-0 appearance-none hover:block"
-        >
-          <button
-            class="hover:text-black hover:bg-white px-2 py-1 border rounded outline-none"
-            @click.prevent="openUpdateTitle = true"
-          >
-            수정
-          </button>
+        <div class="list-action text-xs opacity-0 appearance-none hover:block">
           <button
             class="hover:text-white hover:bg-red-600 hover:border-red-700 px-2 py-1 border rounded outline-none"
             @click="tryRemoveList(list)"
