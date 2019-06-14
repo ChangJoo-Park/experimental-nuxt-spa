@@ -83,7 +83,7 @@ const patchOne = (uuid, payload) => {
 
   return mongo(db =>
     db.collection('lists').findOneAndUpdate(
-      { _id: ObjectID(uuid) },
+      { _id: ObjectId(uuid) },
       {
         $set: updatePayload
       }
