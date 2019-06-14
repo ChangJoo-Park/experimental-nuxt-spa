@@ -19,7 +19,6 @@ export default {
     window.document.addEventListener('keyup', this.emitClose)
   },
   beforeDestroy() {
-    console.log('beforeDestroy')
     window.document.removeEventListener('keyup', this.emitClose)
   },
   methods: {

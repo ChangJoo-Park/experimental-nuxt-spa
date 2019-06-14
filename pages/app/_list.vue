@@ -80,9 +80,7 @@ export default {
       }
     },
     onUpdateItem(item) {
-      console.log('onUpdateItem => ', item._id)
       const index = this.items.findIndex(i => i._id === item._id)
-      console.log('index => ', index)
       Vue.set(this.items, index, item)
     }
   }

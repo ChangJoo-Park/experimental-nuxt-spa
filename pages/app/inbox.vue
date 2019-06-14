@@ -82,7 +82,6 @@ export default {
       }
     },
     onUpdateItem(item) {
-      console.log('inbox item_id=> ', item._id)
       const index = this.items.findIndex(i => i._id === item._id)
       Vue.set(this.items, index, item)
     }

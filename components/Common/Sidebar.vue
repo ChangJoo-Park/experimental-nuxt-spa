@@ -139,6 +139,8 @@ export default {
       this.$repo.lists
         .destroyOne(list._id)
         .then(repsonse => {
+          const index = this.lists.findIndex(l => l._id === list._id)
+          this.lists.splice(index, 1)
           this.$router.push('/app')
         })
         .catch(error => {

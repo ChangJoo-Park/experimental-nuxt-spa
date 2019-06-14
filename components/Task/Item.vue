@@ -291,7 +291,6 @@ export default {
   methods: {
     tryGetCurrentPosition() {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position)
       })
     },
     tryUpdate() {
