@@ -4,6 +4,7 @@ import items from './items'
 import auth from './auth'
 import users from './users'
 import lists from './lists'
+import feeds from './feeds'
 
 export const createRouter = () => {
   const router = express.Router()
@@ -14,6 +15,7 @@ export const createRouter = () => {
   router.use('/api/auth', auth)
   router.use('/api/users', users)
   router.use('/api/lists', lists)
+  router.use('/api/feeds', feeds)
 
   router.get('/api/status', function(req, res) {
     res.status(200).json('hello world')

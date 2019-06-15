@@ -21,7 +21,7 @@ const signup = async payload => {
   }
 
   const passwordHash = bcrypt.hashSync(password, salt)
-  const newUser = { email, passwordHash, username: email }
+  const newUser = { email, passwordHash, username: email, role: 'USER' }
   return mongo(db => db.collection('users').insertOne(newUser)).then(
     ({ ok, ops }) => ops[0]
   )
