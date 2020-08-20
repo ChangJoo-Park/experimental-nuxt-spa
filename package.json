@@ -20,7 +20,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "agenda": "^2.0.2",
     "animate.css": "^3.7.2",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "consola": "^2.7.1",
     "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
